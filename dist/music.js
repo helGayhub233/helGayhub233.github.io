@@ -2,7 +2,7 @@ const ap = new APlayer({
     container: document.getElementById('aplayer'),
     fixed: false,
     autoplay: true,
-    volume: 0.4,
+    volume: 0.2,
     preload: 'auto',
 	order: 'random',
     listFolded: true,
@@ -14,7 +14,7 @@ const ap = new APlayer({
         name: 'Brain Freeze',
         artist: 'Amree',
         url: 'https://offhzec02.bkt.clouddn.com/124ka40521.mp3',
-        cover: 'https://i0.hdslb.com/bfs/face/a9f910a65b0ab8b2033431ca902d7ec47d3c2e52.jpg?param=130y130',
+        cover: 'https://p1.music.126.net/qXzx83WH-9TBtobqmZMDTQ==/109951163382096836.jpg?param=200y200',
       },
       {
         name: 'Date',
