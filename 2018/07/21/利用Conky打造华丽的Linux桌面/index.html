@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="Cache-Control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>PoCo&#39;s Cabin</title>
+    <title>利用Conky打造华丽的Linux桌面监控 · PoCo&#39;s Cabin</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -70,6 +70,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180604 as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <link rel="stylesheet" href= /css/mobile.css?v=20180604 media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
@@ -194,12 +196,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >PoCo&#39;s Secret Cabin</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">利用Conky打造华丽的Linux桌面监控</a>
+            </div>
+    </div>
     
 </header>
     <div class="wrapper">
@@ -212,25 +225,77 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
 	<a href="https://github.com/helGayhub233"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            利用Conky打造华丽的Linux桌面监控
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "conky">conky</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "桌面监控">桌面监控</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">870</span> / Reading time: <span class="post-count">3 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/07/21</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -331,41 +396,80 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/07/21/利用Conky打造华丽的Linux桌面/" >
-            
-                <span>利用Conky打造华丽的Linux桌面监控</span>
-        </a>
-        <div class="abstract-content">
-            <p>Conky 是一款基于GPL协议、应用于桌面环境的系统监视的免费软件，可以在 GNU/Linux 以及 FreeBSD 等系统上运行，低内存消耗并且支持外部脚本。它可以监控许多系统变量、包括 CPU 检测、内存情况、磁盘空间、机器温度、系统消息、流量上传、下载等以及其他的内置部件，是一款简洁的桌面监控工具。
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/21</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "conky">conky</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "桌面监控">桌面监控</a>
-    
-</div>
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>Conky 是一款基于GPL协议、应用于桌面环境的系统监视的免费软件，可以在 GNU/Linux 以及 FreeBSD 等系统上运行，低内存消耗并且支持外部脚本。它可以监控许多系统变量、包括 CPU 检测、内存情况、磁盘空间、机器温度、系统消息、流量上传、下载等以及其他的内置部件，是一款简洁的桌面监控工具。<a id="more"></a></p>
+<p><span id="jump"><font size="2">相关文章：<a href="https://wiki.archlinux.org/index.php/Conky_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87" target="_blank" rel="noopener">Conky ArchWiki</a><br>　　　　　<a href="https://github.com/brndnmtthws/conky" target="_blank" rel="noopener">Github</a><br>　　　　　<a href="https://www.ubuntukylin.com/ukylin/forum.php?mod=viewthread&amp;tid=6113" target="_blank" rel="noopener">cbuntu - 中文文档 v0.2</a></font></span></p>
+<p><center><strong>个性化的样式面板</strong></center><br><img src="https://i.loli.net/2018/07/21/5b521334bbaca.jpg" alt="2018-07-21"></p>
+<hr>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Debian 和 Ubuntu 安装步骤很简单，只需要在终端中输入以下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install conky</span><br></pre></td></tr></table></figure></p>
+<font size="2"><em>其他系统的安装方法参考官方作者的Wiki</em>： <a href="https://github.com/brndnmtthws/conky/wiki/Installation" target="_blank" rel="noopener">Installation Method</a></font>
+
+<p>当然也可以通过git项目进行编译安装：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/aikunzhe/conky_colors.git         // 下载项目</span><br><span class="line">$ <span class="built_in">cd</span> conky_colors                                                // 进入目录</span><br><span class="line">$ make                                                           // 编译</span><br><span class="line">$ sudo make install                                              // 安装</span><br></pre></td></tr></table></figure></p>
+<p>安装相关工具包：（当设置的配置不起作用时，可尝试安装）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install hddtemp curl lm-sensors conky-all         // 安装</span><br><span class="line">$ sudo chmod u+s /usr/sbin/hddtemp                               // 添加权限</span><br><span class="line">$ sudo sensors-detect                           // 执行程序，无视提示直接<span class="string">'yes'</span></span><br><span class="line">$ reboot                                        // 重启</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>安装完成后，只需要在终端中启动：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ conky                                                     // 输入程序名运行</span><br></pre></td></tr></table></figure></p>
+<p>Conky 将会以弹窗的形式运行，并且终端处于活动状态，关闭终端即可停止运行。<br>运行期间，conky 会调用于 <em>/home/$USER/.conky.rc</em> 目录下的默认配置文件 .conky.rc<br><img src="https://i.loli.net/2018/07/21/5b52250a3e6d9.jpg" alt="2018-07-21"><br>首次运行的效果是这样的：（😂简直丑爆了. . .）<br><img src="https://i.loli.net/2018/07/21/5b5226f85e49b.png" alt="2018-07-21"></p>
+<hr>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>默认配置文件的位置确定后我们只需要对conky.rc文件进行操作即可，文件属性默认为<font color="red">隐藏文件</font>，我们需要进入到conky文件夹目录下，按 CTRL+H 显示隐藏文件，找到.conkyrc文件之后再进行编辑。</p>
+<p>或者进入终端用文本编辑器直接打开：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo gedit ~/.conkyrc</span><br></pre></td></tr></table></figure></p>
+<p>打开之后配置内容整体分为两块区域：参数区 和 TEXT（文本）区<br>参数区：可根据需要添加相应的功能，更多相关配置参考之前的文章：<a href="#jump">cbuntu - 中文文档 v0.2</a><br><img src="https://i.loli.net/2018/07/21/5b5239cc43dfe.png" alt="2018-07-21"><br>TEXT区：在参数区的下方都属于TEXT区的作用范围，声明格式为：(颜色，文本，方向，参数)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;color #rgb&#125;</span>文本内容<span class="variable">$alignr</span> | <span class="variable">$alignl</span> | <span class="variable">$alignc</span>$参数名称</span><br></pre></td></tr></table></figure></p>
+<p>在文本加上${color #rgb}可以搭配出不同的效果，以时间窗样图作为声明格式参考：<br><img src="https://i.loli.net/2018/07/21/5b524189b9dd2.jpg" alt="2018-07-21"></p>
+<hr>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>下面是我自己配置的效果，由于跟背景图搭配的原因设置成了半透明，可根据自己的需要调整相应参数。<br>点击下载：<a href="https://file.9mf.net/data/f_94448770.zip" target="_blank" rel="noopener">Config</a>（自行修改文件后缀，或者复制内容粘贴）<br><img src="https://i.loli.net/2018/07/21/5b524647d419a.png" alt="2018-07-21"></p>
+<hr>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p><strong>问： install之后没有找到.conkyrc配置文件怎么办？</strong><br><strong>答：</strong><font size="2"><em>可以将/etc/conky/conky.conf复制到你的家目录下，并将它命名为.conkyrc，这样每次运行时conky会直接调用家目录下的配置文件。</em></font><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cp /etc/conky/conky.conf /home/<span class="variable">$USER</span>/.conkyrc               // 复制到用户目录</span><br><span class="line">$ killall -SIGUSR1 conky                                      // 重启程序</span><br></pre></td></tr></table></figure></p>
+<p><br><br><strong>问： 我需要一个以图形块的方式来显示参数，该如何创建图形边框样式？</strong><br><strong>答：</strong><font size="2"><em>在参数区中将 draw_graph_borders 的值改成 yes ,然后在TEXT区声明即可。（根据文档中的选项进行添加）</em></font><br><br><br><strong>问： 能不能往里面添加一些图标让它看起来更好看？</strong><br><strong>答：</strong><font size="2"><em>可以，参考</em> <a href="https://github.com/aikunzhe/conky_colors" target="_blank" rel="noopener">conky_colors</a>。</font><br><br></p>
+
     </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者: <a href="http://yoursite.com"></a>
+            <p>原文链接: <a href="http://yoursite.com/2018/07/21/利用Conky打造华丽的Linux桌面/">http://yoursite.com/2018/07/21/利用Conky打造华丽的Linux桌面/</a>
+            <p>发表日期: <a href="http://yoursite.com/2018/07/21/利用Conky打造华丽的Linux桌面/">July 21st 2018, 3:01:53</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+        // id: "利用Conky打造华丽的Linux桌面监控", // 可选。默认为 location.href
+        owner: 'helGayhub233',
+        repo: 'helGayhub233.github.io',
+        oauth: {
+            client_id: '3c66712e51e3d8ed8be0',
+            client_secret: 'fd735ffcf79d41b00a0eeb5e9bef702a9089bc6b',
+        },
+    })
+    gitment.render('container')
+
+</script>
+
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -379,6 +483,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行"><span class="toc-number">2.</span> <span class="toc-text">运行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">3.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#示例"><span class="toc-number">4.</span> <span class="toc-text">示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题"><span class="toc-number">5.</span> <span class="toc-text">问题</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -498,6 +620,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
     
         <!-- 页面点击小红心 -->
 	<script type="text/javascript" src="./scripts/clicklove.js"></script>
