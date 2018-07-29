@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="PoCo">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="PoCo">
+    <meta name="keywords" content="PoCo's Blog | PoCo">
+    <meta name="description" content="">
+    <meta name="Cache-Control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>强化学习笔记《WEB前端快速巩固-HTML》 · PoCo&#39;s Cabin</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180604 as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= /css/mobile.css?v=20180604 media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >PoCo&#39;s Secret Cabin</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">强化学习笔记《WEB前端快速巩固-HTML》</a>
+            </div>
+    </div>
+    
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+	<a href="https://github.com/helGayhub233"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            强化学习笔记《WEB前端快速巩固-HTML》
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "HTML">HTML</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "前端">前端</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">4,937</span> / Reading time: <span class="post-count">19 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/07/25</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>HTML（Hyper Text Mark-up Language）即超文本标记语言，它不是一种编程语言而是一种标记型语言(markup language)。<a id="more"></a>“超文本”是指页面内可以包含图片、链接，甚至音乐、程序等非文字元素，“标记语言”是标准通用标记语言下的一个应用，也是一种规范，一种标准，它通过标记符号来标记要显示的网页中的各个部分。</p>
+<p><strong>那么，一张好看的网页是如何做成的？</strong></p>
+<p>简单的说，HTML用来设计网页整体框架布局，CSS用来给网页加上丰富的色彩，而Javascript让网页看起来更生动、更灵活。</p>
+<font size="2">相关教程：<a href="https://www.w3cschool.cn/html_getstarted.html" target="_blank" rel="noopener">W3school</a><br>　　　　　<a href="https://www.runoob.com/" target="_blank" rel="noopener">RUNOOB</a></font>
+
+<h2 id="网络架构"><a href="#网络架构" class="headerlink" title="网络架构"></a>网络架构</h2><hr>
+<p>首先来简单了解一下网络架构，常见的网络模式分为：</p>
+<ul>
+<li>Browser / Server (浏览器/服务器)简称: <a href="https://blog.csdn.net/zhengqijun_/article/details/53056624" target="_blank" rel="noopener">B/S网络架构</a></li>
+<li>Client / Server (客户端/服务器)简称: <a href="https://blog.csdn.net/zhengqijun_/article/details/53056624" target="_blank" rel="noopener">C/S网络架构</a></li>
+</ul>
+<p><font size="2">一张图简单的区分两者区别：</font><br><img src="https://i.loli.net/2018/07/25/5b5765632f98c.png" height="280" width="1000"></p>
+<h2 id="网页结构"><a href="#网页结构" class="headerlink" title="网页结构"></a>网页结构</h2><hr>
+<p>一张网页最基本的结构为：头(head), 主体(body)，“头”部提供关于网页的信息，“主体”部分提供网页的具体内容，其中主体都是成对出现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;                                        // 告诉浏览器代码用什么格式编译</span><br><span class="line">    &lt;head&gt;                                    // 告诉浏览器汉字用什么字符集</span><br><span class="line">    	&lt;title&gt;网页标题头部&lt;/title&gt;             // 显示网页标题，不支持标记</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;                                    // 是网页主要内容的显示区域</span><br><span class="line">    	网页正文内容</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<div align="center"><img src="https://i.loli.net/2018/07/25/5b5816b003220.png" height="210" width="500"></div>
+
+<h3 id="标签格式"><a href="#标签格式" class="headerlink" title="标签格式"></a>标签格式</h3><hr>
+<p>HTML标记大致分为两类：</p>
+<ul>
+<li>双边标记: 是指有开始和结束标记，内容放在开始和结束标记之间。<blockquote>
+<p><em>语法格式：&lt;标签 属性1 = “值1” 属性2 = “值2”&gt;内容&lt;/标签&gt;</em></p>
+</blockquote>
+</li>
+<li>单边标记: 是指只有开始标记，没有结束标记，一般起一个特殊的功能。<blockquote>
+<p><em>语法格式：&lt;标签 属性1 = “值1” 属性2 = “值2”/&gt;</em></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="编写规范"><a href="#编写规范" class="headerlink" title="编写规范"></a>编写规范</h3><hr>
+<p>编写规范的注意事项：</p>
+<ul>
+<li>HTML标记<font color="red">不区分大小写</font>。如：font、Font、FOnt</li>
+<li>HTML标记属性<font color="red">可有可无</font>。有的标记是没有属性的，如: html、head、title等</li>
+<li>HTML的双边标记的内容在<font color="red">开始和结束</font>标签之间，单边标记没有内容</li>
+<li>HTML标记可以相互嵌套，但注意一定是<font color="red">顺序</font>嵌套</li>
+</ul>
+<h3 id="lt-head-gt-标记介绍"><a href="#lt-head-gt-标记介绍" class="headerlink" title="&lt;head&gt;标记介绍"></a>&lt;head&gt;标记介绍</h3><hr>
+<p>meta标记：位于网页的<font color="red">头部(head)</font>中，包含属性但不包含任何内容。</p>
+<p><font size="2">用于提供有关页面的元信息，如针对搜索引擎和更新频度的描述和关键词</font></p>
+<ul>
+<li>http-equiv：文件头原信息，主要目的是服务器向客户端返回时，用什么格式显示<ul>
+<li><font size="2" color="#CD3278">refresh：每隔多少秒刷新网页</font></li>
+</ul>
+</li>
+<li>name：主要用于设置网页的搜索关键字、版权信息、作者等<ul>
+<li><font size="2" color="#CD3278">keywords：网页搜索关键字</font></li>
+<li><font size="2" color="#CD3278">description：网页描述信息</font></li>
+</ul>
+</li>
+<li>text/html：字符集，当网页乱码时需要声明相关编码才可正常显示</li>
+<li>content-type：内容类型</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="lt-body-gt-常用属性"><a href="#lt-body-gt-常用属性" class="headerlink" title="&lt;body&gt;常用属性"></a>&lt;body&gt;常用属性</h3><hr>
+<ul>
+<li>bgcolor：网页背景色</li>
+<li>background：网页背景图片，如：&lt;body background=”images/01.jpg”&gt;</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;body bgcolor=&quot;#ffffff&quot; background=&quot;images/01.jpg&quot;&gt;内容&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="文本标记"><a href="#文本标记" class="headerlink" title="文本标记"></a>文本标记</h2><hr>
+<ul>
+<li>&lt;b&gt;&lt;/b&gt;：字体加粗</li>
+<li>&lt;i&gt;&lt;/i&gt;：字体斜体</li>
+<li>&lt;u&gt;&lt;/u&gt;：下划线</li>
+<li>&lt;s&gt;&lt;/s&gt;：删除线</li>
+<li>&lt;sup&gt;&lt;/sup&gt;：上标：如a<sup>2</sup></li>
+<li>&lt;sub&gt;&lt;/sub&gt;：下标：如b<sub>2</sub></li>
+<li>&lt;font&gt;&lt;/font&gt;：字体标记</li>
+</ul>
+<p>演示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;</span><br><span class="line">    &lt;font size=2 color=&quot;red&quot;&gt;</span><br><span class="line">    &lt;b&gt;this is a text.&lt;/b&gt;</span><br><span class="line">    &lt;i&gt;this is a text.&lt;/i&gt;</span><br><span class="line">    &lt;s&gt;this is a text.&lt;/s&gt;</span><br><span class="line">    2&lt;sup&gt;2&lt;/sup&gt; + 5 = 9</span><br><span class="line">    O&lt;sub&gt;2&lt;/sub&gt;</span><br><span class="line">    &lt;/font&gt;</span><br><span class="line">&lt;/p&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="排版标记"><a href="#排版标记" class="headerlink" title="排版标记"></a>排版标记</h2><hr>
+<ul>
+<li>&lt;p&gt;&lt;/p&gt;：表示一个段落<ul>
+<li><font size="2" color="#CD3278">align：水平对齐方式，取值left（左）、center（中）、right（右）</font></li>
+</ul>
+</li>
+<li>&lt;br&gt;：换行标记</li>
+<li>&lt;hr&gt;：水平线标记<ul>
+<li><font size="2" color="#CD3278">size：水平线的粗细，单位一般为px(像素)</font></li>
+<li><font size="2" color="#CD3278">color：水平线的颜色</font></li>
+<li><font size="2" color="#CD3278">width：水平线的宽度</font></li>
+<li><font size="2" color="#CD3278">noshade：去掉水平线的阴影，默认没有值</font></li>
+</ul>
+</li>
+<li>&lt;pre&gt;&lt;/pre&gt;：预排版标记，原封不动输出（空格、换行符）</li>
+<li>&lt;h1&gt;&lt;h6&gt;：标题标记，定义各种标题，取值：h1 - h6<ul>
+<li><font size="2" color="#CD3278">align：支持水平对齐属性</font><br><br></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h1&gt;我是标题&lt;/h1&gt;</span><br><span class="line">        &lt;p align=&quot;center&quot;&gt;我是第一行&lt;/p&gt;&lt;br&gt;</span><br><span class="line">        &lt;hr size=&quot;1&quot; color=&quot;blue&quot; width=&quot;60%&quot; noshade&gt;</span><br><span class="line">        &lt;p&gt;我是第二行&lt;/p&gt;</span><br><span class="line">        &lt;pre&gt;我是代码块&lt;/pre&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="块元素与行内元素"><a href="#块元素与行内元素" class="headerlink" title="块元素与行内元素"></a>块元素与行内元素</h3><hr>
+<ul>
+<li>&lt;div&gt;：是一个块元素，单独占一行，一般配合CSS使用<font color="red">（块元素嵌套行元素）</font></li>
+<li>&lt;span&gt;：是一个行内元素，不会单独占一行，多个行内元素会排在同一行</li>
+</ul>
+<h2 id="字符实体"><a href="#字符实体" class="headerlink" title="字符实体"></a>字符实体</h2><hr>
+<p>在 HTML 中不能使用小于号（&lt;）和 大于号（&gt;），这是因为浏览器会误认为它们是标签。<br>如果希望正确地显示预留字符，我们必须在 HTML 源代码中使用字符实体（character entities）。<br>常见的字符为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">空格：&amp;nbsp;</span><br><span class="line">&lt;：&amp;lt;</span><br><span class="line">&gt;：&amp;gt;</span><br><span class="line">&amp;: &amp;amp;</span><br><span class="line">￥：&amp;yen;</span><br><span class="line">×：&amp;times</span><br><span class="line">÷：&amp;divide;</span><br></pre></td></tr></table></figure></p>
+<h2 id="编号列表"><a href="#编号列表" class="headerlink" title="编号列表"></a>编号列表</h2><hr>
+<p>在 HTML 中，列表分为有序列表和无序列表。<br>两种列表类型的常用属性：</p>
+<ul>
+<li>type：编号类型取值 1、a、A、i、l</li>
+<li>start：从第几个开始编号（数字）</li>
+</ul>
+<p>有序列表和无序列表的格式为：</p>
+<p><font color="red" size="2">注意：在HTML标记中，内容应该放在最底层标记。</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul type=&quot;A&quot;&gt;                //无序列表</span><br><span class="line">    &lt;li&gt;内容1&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;内容2&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;内容3&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line"></span><br><span class="line">&lt;ol start=&quot;5&quot;&gt;                //有序列表</span><br><span class="line">    &lt;li&gt;内容1&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;内容2&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;内容3&lt;/li&gt;</span><br><span class="line">&lt;/ol&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="滚动字幕标记"><a href="#滚动字幕标记" class="headerlink" title="滚动字幕标记"></a>滚动字幕标记</h3><hr>
+<ul>
+<li>direction：滚动方向，取值：up、down、left、right</li>
+<li>width：滚动宽度</li>
+<li>height 滚动高度</li>
+<li>bgcolor：滚动背景色</li>
+<li>scrollamount：滚动步长值</li>
+<li>scrolldelay：步长的停留时间</li>
+<li>loop：循环滚动次数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;marquee&gt;滚动的内容&lt;/marquee&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="图片标记"><a href="#图片标记" class="headerlink" title="图片标记"></a>图片标记</h2><hr>
+<p>常用属性：</p>
+<ul>
+<li>width：图片宽度</li>
+<li>height：图片高度</li>
+<li>border：图片边框粗细</li>
+<li>src：图片的路径(相对路径)</li>
+<li>align：图片的水平对齐</li>
+<li>hspace：图片与左右文字间距</li>
+<li>vspace：图片与上下文字间距</li>
+</ul>
+<p><font color="red" size="2"><br>注意事项：<br>图片等比例缩放只需要指定 width 或 height 其一<br>align属性只能让文本居中，不能让图片单独居中<br>align可以实现“图文混排”效果。如：align=”left | right”<br></font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;images/01.jpg&quot; width=&quot;400&quot; border=&quot;2&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="链接与锚点"><a href="#链接与锚点" class="headerlink" title="链接与锚点"></a>链接与锚点</h2><hr>
+<p>超级链接的语法格式:</p>
+<p><font size="2" color="red">注意：行内元素，不能再嵌套a标记</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a 属性 = &quot;值&quot;&gt;......&lt;/a&gt;</span><br></pre></td></tr></table></figure></p>
+<p>常用属性：</p>
+<ul>
+<li>href：目标文件的地址URL,可以是<font color="red">相对地址</font>，也可以是<font color="red">绝对地址</font></li>
+<li>target：目标文件的显示窗口<ul>
+<li><font size="2" color="#CD3278">_blank：在新窗口中打开目标文件</font></li>
+<li><font size="2" color="#CD3278">_self：在当前窗口中打开目标文件（<font color="red">默认打开</font>），起到替换当前页的作用</font></li>
+<li><font size="2" color="#CD3278">_parent：在父级窗口来打开目标文件</font></li>
+<li><font size="2" color="#CD3278">_top：在最顶级窗口来打开目标文件</font><br><br></li>
+</ul>
+</li>
+</ul>
+<h3 id="特殊链接"><a href="#特殊链接" class="headerlink" title="特殊链接"></a>特殊链接</h3><hr>
+<p>除了超级链接之外一些比较特殊的链接。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;images/winrar.rar&quot;&gt;&lt;/a&gt;       // 无法执行的文件将执行下载</span><br><span class="line">&lt;a href=&quot;mailto:user@emali.com&quot;&gt;&lt;/a&gt;   // 发送到邮箱</span><br><span class="line">&lt;a href=&quot;#&quot;&gt;&lt;/a&gt;                       // 普通空链接,起到pass作用</span><br></pre></td></tr></table></figure></p>
+<h3 id="锚点"><a href="#锚点" class="headerlink" title="锚点"></a>锚点</h3><hr>
+<p>锚点的作用是在一个网页的不同区域进行跳转。锚点理解为“定义记号”。<br>锚点分为定义锚点和跳转锚点两个部分：</p>
+<p>定义锚点：(锚点名称<font color="red">不能以数字</font>开头)</p>
+<p><font size="2" color="red">注意：定义锚点没有内容，换句话说：不是让我们看的，而是给链接用的</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a name=&quot;锚点名称&quot;&gt;&lt;/a&gt;</span><br></pre></td></tr></table></figure></p>
+<p>跳转锚点：</p>
+<p><font size="2" color="red">注意：这里的锚点之间要有内容，否则无法进行跳转</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;文件名#锚点名称&quot;&gt;...&lt;/a&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="XHTML"><a href="#XHTML" class="headerlink" title="XHTML"></a>XHTML</h2><hr>
+<p>传统的HTML的开发初衷是面向PC端，而随着移动终端的不断出现，HTML已经满足不了市场的需求，为此取代HTML的XHTML诞生。</p>
+<p>XHTML是一种可扩展超文本的标注语言，标记与HTML一模一样，但是语法要比上一代严格的多。</p>
+<h3 id="编写规范-1"><a href="#编写规范-1" class="headerlink" title="编写规范"></a>编写规范</h3><hr>
+<ul>
+<li>所有的标记和属性<font color="red">都要小写</font></li>
+<li>单边标记<font color="red">必须关闭</font></li>
+<li>所有的属性值<font color="red">必须要加引号</font></li>
+<li>所有的属性<font color="red">必须有值</font>，如：&lt;noshade = noshade&gt;</li>
+<li>标记之间要<font color="red">顺序嵌套</font>，外层套内层，一层套一层</li>
+<li>XHTML 网页必须要有<font color="red">DTD文档类型</font>定义代码</li>
+</ul>
+<h3 id="DTD文档类型"><a href="#DTD文档类型" class="headerlink" title="DTD文档类型"></a>DTD文档类型</h3><hr>
+<p>DTD文档类型声明要在网页的最顶部，一共有三大类：</p>
+<ul>
+<li>严格型Strict：不能再使用各种表现标记：如：font、b、bgcolor（使用CSS取代）</li>
+<li>过度型Transitional：继承HTML中的表现写法，继续使用</li>
+<li>框架型Frameset：用框架来划分区域</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-文档类型.dtd&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2018/07/29/5b5dba24a1498.png" alt="20180729205804.png"></p>
+<h2 id="表格标记"><a href="#表格标记" class="headerlink" title="表格标记"></a>表格标记</h2><hr>
+<ul>
+<li>table：定义表格，有了表格才能有表行、表头、表单元<ul>
+<li><font size="2" color="#CD3278">Width：表格宽度，单位可以是百分比，也可以是固定值</font></li>
+<li><font size="2" color="#CD3278">Height：表格高度</font></li>
+<li><font size="2" color="#CD3278">align：表格水平对齐方式，取值：left、center、right</font></li>
+<li><font size="2" color="#CD3278">Border：边框粗细(外边框)</font></li>
+<li><font size="2" color="#CD3278">Bordercolor：边框颜色</font></li>
+<li><font size="2" color="#CD3278">bgcolor：表格背景色</font></li>
+<li><font size="2" color="#CD3278">background：背景图片URL</font></li>
+<li><font size="2" color="#CD3278">cellpadding：单元格边线到内容间的距离（填充距离）</font></li>
+<li><font size="2" color="#CD3278">cellspacing：单元格与单元格之间的距离（间距）</font></li>
+<li><font size="2" color="#CD3278">rules：合并单元格边框线，取值：all （兼容性差）</font></li>
+</ul>
+</li>
+<li>tr：定义普通单元格<ul>
+<li><font size="2" color="#CD3278">bgcolor：行的背景色</font></li>
+<li><font size="2" color="#CD3278">height：行的高度</font></li>
+<li><font size="2" color="#CD3278">align：行中的文本水平居中，取值：left、center、right</font></li>
+<li><font size="2" color="#CD3278">valign：垂直居中，取值：top（上）、midle（中）、bottom（下）</font></li>
+</ul>
+</li>
+<li>td：定义标题单元格<ul>
+<li><font size="2" color="#CD3278">width：单元格宽度</font></li>
+<li><font size="2" color="#CD3278">height：单元格高度</font></li>
+<li><font size="2" color="#CD3278">bgcolor：单元格背景色</font></li>
+<li><font size="2" color="#CD3278">background：单元格背景图片</font></li>
+<li><font size="2" color="#CD3278">align：水平对齐</font></li>
+<li><font size="2" color="#CD3278">valign：垂直对齐</font></li>
+<li><font size="2" color="#CD3278">rowspan：上下单元格合并。合并属性必须放在第一个单元格中</font></li>
+<li><font size="2" color="#CD3278">colspan：左右单元格合并。合并时有增就有减，保证每一行单元格的个数不变</font></li>
+</ul>
+</li>
+<li>th：定义表头 （与td属性相同）<br><br></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;table 属性=属性值 ...&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;th&gt;我是标题&lt;/th&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td&gt;我是内容&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="表格标题"><a href="#表格标题" class="headerlink" title="表格标题"></a>表格标题</h3><hr>
+<p>caption是table的子标记，即属于table下的二级标签。<br>语法格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;table 属性=属性值 ...&gt;</span><br><span class="line">    &lt;caption&gt;我是表格大标题&lt;/caption&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;th&gt;我是框标题&lt;/th&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td&gt;我是内容&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="表单的概念"><a href="#表单的概念" class="headerlink" title="表单的概念"></a>表单的概念</h2><hr>
+<p>表单主要用来获取客户端用户数据（信息）的。比如：注册表单、查询表单、登录表单等..<br>它的工作原理，是当浏览带有表单的网页填写了一些必要的信息，然后点击某个按钮进行提交。<br>这些表单数据，通过互联网传递到了服务器上，服务器中有专门的程序，对表单数据进行认证。如果验证成功，将你的数据存入数据库（MySQL等）,否则返回一个验证成功的信息，如果验证失败，将返回一个错误的信息。<br><img src="https://i.loli.net/2018/07/29/5b5db9203fc4d.png" alt="20180729205342.png"></p>
+<h3 id="表单的结构"><a href="#表单的结构" class="headerlink" title="表单的结构"></a>表单的结构</h3><hr>
+<p>样式：</p>
+<p><div><img src="https://i.loli.net/2018/07/29/5b5dc063eb7b7.png"></div><br>代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;form name=&quot;名称&quot; mothod=&quot;提交方式&quot; action=&quot;处理文件.php&quot;&gt;</span><br><span class="line">    用户名：&lt;input type=&quot;text&quot; name=&quot;username&quot; /&gt;</span><br><span class="line">    密码：&lt;input type=&quot;password&quot; name=&quot;userpwd&quot; /&gt;</span><br><span class="line">    &lt;input type=&quot;submit&quot; vaule=&quot;提交表单&quot; /&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="lt-form-gt-标记属性-块元素"><a href="#lt-form-gt-标记属性-块元素" class="headerlink" title="&lt;form&gt;标记属性 - 块元素"></a>&lt;form&gt;标记属性 - 块元素</h3><hr>
+<ul>
+<li>name：自定义表单名称，主要给javascript来调用。用来做客户端表单验证</li>
+<li>method：表单的提交方式，取值：get 或 post</li>
+<li>action：指定表单的处理程序，一般是PHP文件</li>
+<li>enctype：指定表单数据的编码方式（解密方式），这个属性只能用在 method = “post” 的情况下<ul>
+<li><font size="2" color="#CD3278">application/x-www-form-urldecoded //默认的加密方式</font></li>
+<li><font size="2" color="#CD3278">multipart/form-data //需要上传文件，值必须为本身</font><br><br></li>
+</ul>
+</li>
+</ul>
+<h3 id="GET方法和POST方法"><a href="#GET方法和POST方法" class="headerlink" title="GET方法和POST方法"></a>GET方法和POST方法</h3><hr>
+<p><strong>GET提交方式：</strong><br>GET 方式，是将表单数据追加到action指定的处理程序后面，然后向服务器发出请求。浏览器传递数据默认为GET方式。<br>说明：</p>
+<ul>
+<li>login.php：是表单处理程序文件</li>
+<li>username=admin&amp;userpwd=123456：表单提交的数据，又称为”查询字符串”</li>
+<li>action：文件和查询字符串之间用“？”分隔<ul>
+<li><font size="2" color="#CD3278">如果表单action为空，那么表单数据提交给自己处理</font></li>
+<li><font size="2" color="#CD3278">每两个表单元素的”名称=值”之间用”&amp;”分隔</font></li>
+<li><font size="2" color="#CD3278">表单名称和表单值之间用”=”分隔</font><br><br></li>
+</ul>
+</li>
+</ul>
+<p><font size="2" color="red">注意：如果某个表单元素，不想往服务器传递数据，那么可以不给它加name属性。</font><br><img src="https://i.loli.net/2018/07/29/5b5dc54dd7876.jpg" alt="20180729213442.jpg"></p>
+<p>特点：</p>
+<ul>
+<li>GET 方式不能提交敏感数据，如：密码</li>
+<li>GET 方式只提交少量数据，因为地址栏的长度有限制，大约100外的字符</li>
+<li>GET 方式下不能上传附件</li>
+</ul>
+<p><strong>POST提交方式：</strong><br>POST方式，它不是将表单数据追加到地址上，而是直接传给表单处理程序。</p>
+<ul>
+<li>POST 提交的数据<font color="red">相对安全</font></li>
+<li>POST 可以提交海量数据</li>
+<li>POST 方式可以上传附件<br><br></li>
+</ul>
+<h2 id="单行文本域"><a href="#单行文本域" class="headerlink" title="单行文本域"></a>单行文本域</h2><hr>
+<p>语法格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;text&quot; 属性 = &quot;值&quot; /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>常用属性：</p>
+<ul>
+<li>name：文本框的名字，命名规则：字母、数字、下划线，只能以字母开头</li>
+<li>type：表单元素的类型</li>
+<li>value：元素中的值</li>
+<li>size：元素的长度，以”字符”为单位</li>
+<li>maxlenght：最多可以输入多少个字符，超出的无法进行输入</li>
+<li>readonly：只读属性，可以选中，但不能修改如：&lt;readonly = “readonly”&gt;</li>
+<li>disabled：禁用属性，不能选中，不能修改如：&lt;disabled = “disabled”&gt;<br><br></li>
+</ul>
+<h2 id="单选按钮"><a href="#单选按钮" class="headerlink" title="单选按钮"></a>单选按钮</h2><hr>
+<p>语法格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;radio&quot; 属性=&quot;值&quot; checked=&quot;chedcked&quot; /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>常用属性：</p>
+<ul>
+<li>name：元素的名称</li>
+<li>value：元素的值，该value中的数据将发往服务器</li>
+<li>checked：默认选择哪一项，如：&lt;checked = “checked”&gt;</li>
+</ul>
+<p>注意：一组单选按钮，只能选择一个，但name的值必须一致，如：&lt;name = “sex”&gt;</p>
+<h2 id="复选框"><a href="#复选框" class="headerlink" title="复选框"></a>复选框</h2><hr>
+<p>语法格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">input type=&quot;checkbox&quot; 属性=&quot;值&quot; /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>常用属性：</p>
+<ul>
+<li>name：元素的名称</li>
+<li>value：元素的值</li>
+<li>checked：默认选中，如：&lt;checked = “checked”&gt;</li>
+</ul>
+<h2 id="下拉列表"><a href="#下拉列表" class="headerlink" title="下拉列表"></a>下拉列表</h2><hr>
+<p>语法格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;select name=&quot;名称&quot;&gt;</span><br><span class="line">    &lt;option value=&quot;北京市&quot;&gt;北京市&lt;/option&gt;</span><br><span class="line">    &lt;option value=&quot;天津市&quot;&gt;天津市&lt;/option&gt;</span><br><span class="line">    &lt;option value=&quot;河北市&quot;&gt;河北市&lt;/option&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>select：列表名称，只有一个&lt;name&gt;属性</li>
+<li>opetion：列表选项：属性有两个：&lt;value&gt;属性、&lt;selected&gt;属性<ul>
+<li><font size="2" color="#CD3278">selected：默认选中属性，如：&lt;selected = “selected”&gt;</font><br><br></li>
+</ul>
+</li>
+</ul>
+<h2 id="文本区域"><a href="#文本区域" class="headerlink" title="文本区域"></a>文本区域</h2><hr>
+<p>语法格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;textarea name=&quot;名称&quot; cols=&quot;宽度&quot; rows=&quot;高度&quot;&gt;默认文本&lt;/textarea&gt;</span><br></pre></td></tr></table></figure></p>
+<p>常用属性：</p>
+<ul>
+<li>name：元素名称</li>
+<li>value：文本内容</li>
+<li>cols：宽度，是指多少个字符宽。</li>
+<li>rows：高度，是指几行高。<br><br></li>
+</ul>
+<h2 id="其他按钮"><a href="#其他按钮" class="headerlink" title="其他按钮"></a>其他按钮</h2><hr>
+<p><strong>提交按钮：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;submiit&quot; value=&quot;提交表单&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
+<p><strong>重置按钮：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;reset&quot; value=&quot;重新填写&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
+<p><strong>图片按钮：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;image&quot; src=&quot;images/btn02.png&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
+<p><strong>普通按钮：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;button&quot; onclick=&quot;javaascript:window.close()&quot; value=&quot;关闭窗口&quot; /&gt;</span><br></pre></td></tr></table></figure></p>
+<p><font size="2" color="red">注意：普通按钮本身是不具备任何功能，一般要配合JS使用实现相应的功能</font><br><br></p>
+<h2 id="文件上传域"><a href="#文件上传域" class="headerlink" title="文件上传域"></a>文件上传域</h2><hr>
+<p>功能：就是一个看不见的框，传递一些值，而这个值又不想让别人看见。<br>用处：主要用于PHP后面程序，如：修改某一条新闻内容时，需要传递一个新闻的id号<br>语法格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;hidden&quot; name=&quot;名称&quot; value=&quot;默认值&quot; /&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="上传文件域"><a href="#上传文件域" class="headerlink" title="上传文件域"></a>上传文件域</h2><hr>
+<p>常用属性：</p>
+<ul>
+<li>name：表单元素的名称</li>
+<li>value：表单元素的值，这个值其实就是上传的文件名，value属性是只读属性，这个value的内容只能来手动选择上传的文件，而不能用户自己指定一个路径。为了安全起见，value是只读的。<br><br></li>
+</ul>
+<p>语法格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;file&quot; 属性=&quot;属性&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
+<p><font size="2" color="red">注意：上传文件域只能实现上传文件框，而不能真正实现上传功能，上传功能是用PHP来实现的</font><br><br></p>
+<h2 id="图片热点"><a href="#图片热点" class="headerlink" title="图片热点"></a>图片热点</h2><hr>
+<p>图片热点即图像地图，给一张图片中添加多个可点击链接，默认情况下，一张图片只能加一个链接。<br>标记结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;images/01.jpg&quot; usermap=&quot;#Map&quot;/&gt;</span><br><span class="line">&lt;map id=&quot;Map&quot;&gt;</span><br><span class="line">    &lt;area shape=&quot;热区形状&quot; coords=&quot;热区坐标&quot; href=&quot;链接地址&quot; /&gt;</span><br><span class="line">    &lt;area shape=&quot;热区形状&quot; coords=&quot;热区坐标&quot; href=&quot;链接地址&quot; /&gt;</span><br><span class="line">    &lt;area shape=&quot;热区形状&quot; coords=&quot;热区坐标&quot; href=&quot;链接地址&quot; /&gt;</span><br><span class="line">&lt;/map&gt;</span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h3 id="lt-area-gt-标记的常用属性："><a href="#lt-area-gt-标记的常用属性：" class="headerlink" title="&lt;area&gt;标记的常用属性："></a>&lt;area&gt;标记的常用属性：</h3><hr>
+<ul>
+<li>shape：热区形状，取值：rect(矩形)、cirele(圆形)、polygon(多边形)</li>
+<li>coords:热区的坐标(位置)<ul>
+<li><font size="2" color="#CD3278">如果 &lt;shape=rect&gt; 时，那么coords=”x1,y1,x2,y2”，例如：coords=”50,50,200,150”</font></li>
+<li><font size="2" color="#CD3278">如果 &lt;shape=circle&gt; 时，那么coords=”x,y,r”，其中(x,y)为圆心坐标，r为半径</font><br><br></li>
+</ul>
+</li>
+</ul>
+<h2 id="普通框架"><a href="#普通框架" class="headerlink" title="普通框架"></a>普通框架</h2><hr>
+<p>框架的概念（框架技术）：将一个浏览器窗口划分成若干个小窗口，每一个小窗口显示一个独立的网页。比如：一个窗户由窗格(框架集)和玻璃(框架页)构成，那么框架集用来规划窗格，框架页用来确定每个窗格中放的玻璃，即<font color="red">先有结构，后有内容。</font></p>
+<h3 id="框架集和框架页"><a href="#框架集和框架页" class="headerlink" title="框架集和框架页"></a>框架集和框架页</h3><hr>
+<p>框架网页的DTD类型必须是:frameset.dtd<br><img src="https://i.loli.net/2018/07/29/5b5de43444c70.png" alt="20180729235735.png"><br>框架集：主要用来划分窗口<br>框架页：主要用来指定窗口默认显示的网页地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;frameset cols=&quot;33%,*,33%&quot; frameborder=&quot;yes&quot; border=&quot;20&quot;&gt;</span><br><span class="line">    &lt;frame src=&quot;https://m.taobao.com&quot; /&gt;</span><br><span class="line">    &lt;frame src=&quot;https://m.jd.com&quot; /&gt;</span><br><span class="line">	&lt;frame src=&quot;https://m.pinduoduo.com/&quot; /&gt;</span><br><span class="line">&lt;/frameset&gt;</span><br></pre></td></tr></table></figure></p>
+<p>效果：<br><img src="https://i.loli.net/2018/07/30/5b5de6baebd9f.png" alt="20180730000801.png"></p>
+<h3 id="lt-frameset-gt-属性"><a href="#lt-frameset-gt-属性" class="headerlink" title="&lt;frameset&gt;属性"></a>&lt;frameset&gt;属性</h3><hr>
+<p><font size="2" color="red">注意：cols属性和rows属性，每个框架只能选其中一个不能同时使用。</font></p>
+<ul>
+<li>cols：划分左右型框架<ul>
+<li><font size="2" color="#CD3278">cols=”200,*”  //左框架的宽度为200px,剩下的都是右框架比例</font></li>
+<li><font size="2" color="#CD3278">cols=”180,*,180”  //左右框架的宽分别为180px,剩下都是中间框架比例</font></li>
+<li><font size="2" color="#CD3278">cols=”20%,*”  //划分框架时，可以用百分比来表示</font></li>
+</ul>
+</li>
+<li>rows：划分上下型框架<ul>
+<li><font size="2" color="#CD3278">rows=”200,*”  //上框架的高度为200px，剩下都是下框架比例</font></li>
+<li><font size="2" color="#CD3278">rows=”180,*,180”  //上框架和下框架高分别为180px，剩下都是中间框架</font></li>
+</ul>
+</li>
+<li>frameborder：是否显示框架的边框线，取值：1 或 0</li>
+<li>border：边框线的粗细</li>
+<li>bordercolor：边框颜色<br><br></li>
+</ul>
+<h3 id="lt-frame-gt-框架页的属性"><a href="#lt-frame-gt-框架页的属性" class="headerlink" title="&lt;frame&gt;框架页的属性"></a>&lt;frame&gt;框架页的属性</h3><hr>
+<ul>
+<li>src：当前小窗口中，默认显示的网页地址</li>
+<li>noresize：不能调整小窗口的大小，如：&lt;noresize = “norsesize”&gt;</li>
+<li>scolling：是否显示滚动条，取值：auto、yes、no</li>
+<li>name：给当前小窗口起个名字，这个name就是给a标记target属性来用的<br><br></li>
+</ul>
+<h3 id="lt-noframes-gt-含义"><a href="#lt-noframes-gt-含义" class="headerlink" title="&lt;noframes&gt;含义"></a>&lt;noframes&gt;含义</h3><hr>
+<p>描述：当你的浏览器不支持框架时，显示的提示信息，一般情况下，IE6以下不支持框架，IE6+都支持。<br>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;noframes&gt;您当前的版本太低，请升级浏览器！&lt;/noframes&gt;</span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h3 id="框架嵌套"><a href="#框架嵌套" class="headerlink" title="框架嵌套"></a>框架嵌套</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;frameset rows=&quot;64,*&quot; frameborder=&quot;no&quot;&gt;</span><br><span class="line">    &lt;frame src=&quot;top.html&quot; noresize=&quot;norseize&quot; scrolling=&quot;no&quot; /&gt;</span><br><span class="line">    &lt;!--框架嵌套框架--&gt;</span><br><span class="line">    &lt;frameset cols=&quot;182,*&quot; frameborder=&quot;no&quot;&gt;</span><br><span class="line">        &lt;frame src=&quot;left.html&quot; noresize=&quot;noresize&quot; /&gt;</span><br><span class="line">        &lt;frame src=&quot;main.html&quot; name=&quot;mainFrame&quot; /&gt;</span><br><span class="line">    &lt;/frameset&gt;</span><br><span class="line">&lt;/frameset&gt;</span><br><span class="line">&lt;noframes&gt;您当前的版本太低，请升级浏览器！&lt;/noframes&gt;</span><br></pre></td></tr></table></figure>
+<p>效果：<br><img src="https://i.loli.net/2018/07/30/5b5dee4828fbb.png" alt="20180730004043.png"><br><br><br><strong>注意事项：</strong></p>
+<ul>
+<li>&lt;frameset&gt;框架，可以称为”普通框架”</li>
+<li>在”普通框架”中。框架的制作分为两部分：<font color="red">(1)框架结构的规划，(2)制作具体的页面</font></li>
+<li>在”普通框架”的结构划分中，不能出现<font color="red">&lt;body&gt;</font>标记，因为没有实际的内容<br><br></li>
+</ul>
+<h3 id="内嵌框架（行内框架）"><a href="#内嵌框架（行内框架）" class="headerlink" title="内嵌框架（行内框架）"></a>内嵌框架（行内框架）</h3><hr>
+<p>描述：内嵌框架，相当于在现有的玩野中，挖了一个”窟窿”，通过这个”窟窿”可以看见里边的内容。</p>
+<p><font color="red">与普通框架的区别：&lt;iframe&gt;是&lt;body&gt;的子标记，因此，它应该放在&lt;body&gt;。</font><br>常用属性：</p>
+<ul>
+<li>src：引入的文件地址</li>
+<li>width：框架的宽度</li>
+<li>height：框架的高度</li>
+<li>frameborder：是否显示框架的边框线，取值：yes 或 no</li>
+<li>scrolling：是否显示滚动条，取值：auto、yes、no</li>
+<li>border：边框的粗细</li>
+<li>name：指定当前小窗口的名称，该名称也是给&lt;a&gt;标记target属性来用</li>
+<li>align：框架在网页中的对齐方式，取值：left、center、right<ul>
+<li><font size="2" color="#CD3278">其中取值left 或 right，可以实现图文混排的效果，与：&lt;img&gt;的对齐方式一致</font><br><br></li>
+</ul>
+</li>
+</ul>
+<p><font color="red" size="2">注意：src引入的文件只能是html文件或php文件，不能是其他文件。</font><br>语法格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe 属性=&quot;值&quot;&gt;我是一个内嵌网页&lt;/iframe&gt;</span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<p align="center" style="color:#009ACD"><b><s>以上就是所有HTML语法的复习知识欢迎留言补充！</s></b></p>
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p><font size="3">原文作者: <a href="https://seekme.club">PoCo</a></font>
+            <p><font size="3">原文链接: <a href="https://seekme.club/2018/07/25/强化学习笔记《WEB前端知识巩固-HTML》/">https://seekme.club/2018/07/25/强化学习笔记《WEB前端知识巩固-HTML》/</a></font>
+            <p><font size="3">发表日期: <a href="https://seekme.club/2018/07/25/强化学习笔记《WEB前端知识巩固-HTML》/">July 25th 2018, 12:41:24</a></font>
+            <p><font size="3">版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</font></p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/07/21/利用Conky打造华丽的Linux桌面/" title= 利用Conky打造华丽的Linux桌面监控 >
+                    <div class="prevTitle">利用Conky打造华丽的Linux桌面监控</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+<div id="container"></div>
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: '强化学习笔记《WEB前端快速巩固-HTML》', // 可选。默认为 location.href
+        owner: 'helGayhub233',
+        repo: 'helGayhub233.github.io',
+        oauth: {
+            client_id: '3c66712e51e3d8ed8be0',
+            client_secret: 'fd735ffcf79d41b00a0eeb5e9bef702a9089bc6b',
+        },
+    })
+    gitment.render('container')
+
+</script>
+
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+	<div>
+	<p class="copyright text-muted" style="font-size: 14px">
+	2018 PoCo's Blog <a href="https://hexo.io/" target="_blank"><span class="iconfont-archer power"></span></a> Powered by HEXO<br />
+		<p align="center" style="font-size: 12px;color: #777777;font-family: 'Oswald-Regular';src=url('/themes/archer/source/font/')">Hosted by <a href="https://pages.coding.me" style="font-weight: bold;color: #777777">Coding Pages</a></p>
+	</div>
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#网络架构"><span class="toc-number">1.</span> <span class="toc-text">网络架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网页结构"><span class="toc-number">2.</span> <span class="toc-text">网页结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#标签格式"><span class="toc-number">2.1.</span> <span class="toc-text">标签格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编写规范"><span class="toc-number">2.2.</span> <span class="toc-text">编写规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-head-gt-标记介绍"><span class="toc-number">2.3.</span> <span class="toc-text">&lt;head&gt;标记介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-body-gt-常用属性"><span class="toc-number">2.4.</span> <span class="toc-text">&lt;body&gt;常用属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文本标记"><span class="toc-number">3.</span> <span class="toc-text">文本标记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排版标记"><span class="toc-number">4.</span> <span class="toc-text">排版标记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#块元素与行内元素"><span class="toc-number">4.1.</span> <span class="toc-text">块元素与行内元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符实体"><span class="toc-number">5.</span> <span class="toc-text">字符实体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编号列表"><span class="toc-number">6.</span> <span class="toc-text">编号列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#滚动字幕标记"><span class="toc-number">6.1.</span> <span class="toc-text">滚动字幕标记</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片标记"><span class="toc-number">7.</span> <span class="toc-text">图片标记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链接与锚点"><span class="toc-number">8.</span> <span class="toc-text">链接与锚点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#特殊链接"><span class="toc-number">8.1.</span> <span class="toc-text">特殊链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#锚点"><span class="toc-number">8.2.</span> <span class="toc-text">锚点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XHTML"><span class="toc-number">9.</span> <span class="toc-text">XHTML</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#编写规范-1"><span class="toc-number">9.1.</span> <span class="toc-text">编写规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DTD文档类型"><span class="toc-number">9.2.</span> <span class="toc-text">DTD文档类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表格标记"><span class="toc-number">10.</span> <span class="toc-text">表格标记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表格标题"><span class="toc-number">10.1.</span> <span class="toc-text">表格标题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表单的概念"><span class="toc-number">11.</span> <span class="toc-text">表单的概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表单的结构"><span class="toc-number">11.1.</span> <span class="toc-text">表单的结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-form-gt-标记属性-块元素"><span class="toc-number">11.2.</span> <span class="toc-text">&lt;form&gt;标记属性 - 块元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GET方法和POST方法"><span class="toc-number">11.3.</span> <span class="toc-text">GET方法和POST方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单行文本域"><span class="toc-number">12.</span> <span class="toc-text">单行文本域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单选按钮"><span class="toc-number">13.</span> <span class="toc-text">单选按钮</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#复选框"><span class="toc-number">14.</span> <span class="toc-text">复选框</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下拉列表"><span class="toc-number">15.</span> <span class="toc-text">下拉列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文本区域"><span class="toc-number">16.</span> <span class="toc-text">文本区域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他按钮"><span class="toc-number">17.</span> <span class="toc-text">其他按钮</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件上传域"><span class="toc-number">18.</span> <span class="toc-text">文件上传域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上传文件域"><span class="toc-number">19.</span> <span class="toc-text">上传文件域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片热点"><span class="toc-number">20.</span> <span class="toc-text">图片热点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-area-gt-标记的常用属性："><span class="toc-number">20.1.</span> <span class="toc-text">&lt;area&gt;标记的常用属性：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#普通框架"><span class="toc-number">21.</span> <span class="toc-text">普通框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#框架集和框架页"><span class="toc-number">21.1.</span> <span class="toc-text">框架集和框架页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-frameset-gt-属性"><span class="toc-number">21.2.</span> <span class="toc-text">&lt;frameset&gt;属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-frame-gt-框架页的属性"><span class="toc-number">21.3.</span> <span class="toc-text">&lt;frame&gt;框架页的属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-noframes-gt-含义"><span class="toc-number">21.4.</span> <span class="toc-text">&lt;noframes&gt;含义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#框架嵌套"><span class="toc-number">21.5.</span> <span class="toc-text">框架嵌套</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内嵌框架（行内框架）"><span class="toc-number">21.6.</span> <span class="toc-text">内嵌框架（行内框架）</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">文章</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">标签</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">分类</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 2
+        <!-- search  -->
+        </div>
+            <div class="site-search popup-trigger">
+                <span class="iconfont-archer search-icon">&#xe627;</span>
+            </div>
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/25</span><a class="archive-post-title" href= "/2018/07/25/强化学习笔记《WEB前端知识巩固-HTML》/" >强化学习笔记《WEB前端快速巩固-HTML》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/21</span><a class="archive-post-title" href= "/2018/07/21/利用Conky打造华丽的Linux桌面/" >利用Conky打造华丽的Linux桌面监控</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="conky"><span class="iconfont-archer">&#xe606;</span>conky</span>
+    
+        <span class="sidebar-tag-name" data-tags="桌面监控"><span class="iconfont-archer">&#xe606;</span>桌面监控</span>
+    
+        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
+    
+        <span class="sidebar-tag-name" data-tags="前端"><span class="iconfont-archer">&#xe606;</span>前端</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="杂项"><span class="iconfont-archer">&#xe60a;</span>杂项</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "PoCo"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+    
+        <!-- 页面点击小红心 -->
+	<script type="text/javascript" src="./scripts/clicklove.js"></script>
+    </body>
+</html>
+
+

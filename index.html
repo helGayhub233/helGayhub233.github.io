@@ -354,6 +354,37 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2018/07/25/强化学习笔记《WEB前端知识巩固-HTML》/" >
+            
+                <span>强化学习笔记《WEB前端快速巩固-HTML》</span>
+        </a>
+        <div class="abstract-content">
+            <p>HTML（Hyper Text Mark-up Language）即超文本标记语言，它不是一种编程语言而是一种标记型语言(markup language)。
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/25</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "HTML">HTML</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "前端">前端</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2018/07/21/利用Conky打造华丽的Linux桌面/" >
             
                 <span>利用Conky打造华丽的Linux桌面监控</span>
@@ -464,23 +495,31 @@ height:50vh;
     
     <style>
         .example{
-            font-size:13px
+            font-size:13px;
+            background-color: black;
+            text-align: center;
+            color: #A9A9A9;
+
                 }
         .jsfont{
-            font-size:12px
+            font-size:12px;
+            background-color: #ffffff;
+            text-align: center;
+            font-family: inherit;
+            background-color: #ccc;
                 }                  
         .jz{
             vertical-align: middle;
             text-align: center;
-            }
-
+        }
     </style>
+
     <body><link rel="stylesheet" href="/dist/APlayer.min.css">
     <div id="aplayer"></div>
     <script type="text/javascript" src="/dist/APlayer.min.js"></script>
     <script type="text/javascript" src="/dist/music.js"></script></body>
-    <div align="center" class="jsfont">
-        <script language="javascript"">
+    <div class="jsfont" >
+        <script language="javascript">
             function tick() {
                 var days,hours, minutes, seconds;
                 var openday = new Date('2018/06/24 12:00');    //这里填写建站时间
@@ -493,7 +532,7 @@ height:50vh;
                 minutes=Math.floor(total/60);
                 total=total-minutes*60;
                 seconds=Math.floor(total);
-                timeString = "运行时间 "+days+"天 "+hours+"时 "+minutes+"分 "+seconds+"秒 ";
+                timeString = "运行时间： "+days+" 天 "+hours+" 时 "+minutes+" 分 "+seconds+" 秒 ";
                 document.getElementById("Clock").innerHTML = timeString;
                 window.setTimeout("tick();", 1000);
             }
@@ -501,7 +540,9 @@ height:50vh;
             </script>
             <span id="Clock"></span>
     </div>
-    <div align="center" class="example">您是第 <img class="jz" width="37" border="0" src="https://cc.amazingcounters.com/counter.php?i=3224651&c=9674266"> 位访客</a></div></div>
+    <div  class="example">您是第 <img class="jz" width="37" border="0" src="https://cc.amazingcounters.com/counter.php?i=3224651&c=9674266"> 位访客</a>
+    </div>
+</div>
 
 
 
@@ -539,9 +580,16 @@ height:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 1
+        Total : 2
         <!-- search  -->
         </div>
             <div class="site-search popup-trigger">
@@ -559,6 +607,11 @@ height:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">07/25</span><a class="archive-post-title" href= "/2018/07/25/强化学习笔记《WEB前端知识巩固-HTML》/" >强化学习笔记《WEB前端快速巩固-HTML》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">07/21</span><a class="archive-post-title" href= "/2018/07/21/利用Conky打造华丽的Linux桌面/" >利用Conky打造华丽的Linux桌面监控</a>
         </li>
     
@@ -570,6 +623,10 @@ height:50vh;
         <span class="sidebar-tag-name" data-tags="conky"><span class="iconfont-archer">&#xe606;</span>conky</span>
     
         <span class="sidebar-tag-name" data-tags="桌面监控"><span class="iconfont-archer">&#xe606;</span>桌面监控</span>
+    
+        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
+    
+        <span class="sidebar-tag-name" data-tags="前端"><span class="iconfont-archer">&#xe606;</span>前端</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
