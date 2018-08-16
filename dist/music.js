@@ -1,12 +1,12 @@
 const ap = new APlayer({
     container: document.getElementById('aplayer'),
     fixed: false,
-    autoplay: true,
+    autoplay: false,
     volume: 0.15,
     preload: 'auto',
 	order: 'random',
     listFolded: true,
-    theme: '#ff0000',
+    theme: '#1E90FF',
     mutex: true,
     loop: 'none',
     audio: [
@@ -16,12 +16,13 @@ const ap = new APlayer({
         url: 'http://offhzec02.bkt.clouddn.com/124ka40521.mp3',
         cover: 'https://p1.music.126.net/qXzx83WH-9TBtobqmZMDTQ==/109951163382096836.jpg?param=200y200',
       },
-      {
+/*      {
         name: 'Date Remix',
         artist: 'Kotori',
         url: 'http://offhzec02.bkt.clouddn.com/lo213iszm.mp3',
         cover: 'https://p1.music.126.net/GmWtbwYH64Ai_65vYn6E3Q==/3438172871857105.jpg?param=130y130',
       },
+*/
       {
         name: 'Fast Car',
         artist: 'Jonas Blue',
