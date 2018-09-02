@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="PoCo">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="PoCo">
+    <meta name="keywords" content="PoCo's Blog | PoCo">
+    <meta name="description" content="">
+    <meta name="Cache-Control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>强化学习笔记《WEB前端快速巩固-JavaScript》 · PoCo&#39;s Cabin</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180604 as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= /css/mobile.css?v=20180604 media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <!--<link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>--> 
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+    <!-- DaoVoice  -->
+    <script>(function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/2fcd9efd.js","daovoice");</script>
+<script>
+  daovoice('init', {
+    app_id: "2fcd9efd",
+  });
+  daovoice('update');
+</script>
+
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >PoCo&#39;s Secret Cabin</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">强化学习笔记《WEB前端快速巩固-JavaScript》</a>
+            </div>
+    </div>
+    
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+	<a href="https://github.com/helGayhub233"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            强化学习笔记《WEB前端快速巩固-JavaScript》
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "前端">前端</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Javascript">Javascript</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>文章字数：<span class="post-count">7,866 words</span> &ensp; 阅读时间：<span class="post-count">30 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">发布日期：2018/08/17</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span>阅读次数：<span id="busuanzi_value_page_pv"></span></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&nbsp;&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>JavaScript ( 简称：”JS” )， 是一种小型、轻量级、面向对象、跨平台的客户端脚本语言。已经被广泛用于 Web 应用开发，常用来为网页添加各式各样的动态功能，为用户提供更流畅美观的浏览效果。<a id="more"></a>通常 JavaScript 脚本是通过嵌入在HTML中来实现自身的功能的。</p>
+<p>JavaScript程序可以在多种平台下运行，如：windows、linux、mac、ios等，且脚本程序只能在客户端的浏览器来运行，不能在服务器端来运行。</p>
+<p><font size="4"><strong>JavaScript 能干什么？</strong></font></p>
+<ul>
+<li>表单验证：是JS最基本的功能(如下图)</li>
+<li>动态HTML：可以实现一些动态的、重复的效果</li>
+<li>交互式：人机交互，通过键盘或鼠标，与网页中的元素进行交互。</li>
+</ul>
+<p><img src="https://i.loli.net/2018/08/17/5b76e50d34a3f.gif" alt="20180817.gif"></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><hr>
+<p>名称的由来：最初是 网景公司(Netscape) 开发的 “LiveScript”，为自己的浏览器Navigator2.0开的客户端语言。想借助 Java 的名气很快成长起来，因此改名为 “JavaScript”。</p>
+<p><font color="red">Java 和 JavaScript 没有直接的联系。</font><br></p>
+<h2 id="lt-script-gt-标记"><a href="#lt-script-gt-标记" class="headerlink" title="&lt;script&gt;标记"></a>&lt;script&gt;标记</h2><hr>
+<p>JS中代码也是嵌入到HTML文档中去的。同一个网页中可以有HTML代码、CSS代码、JavaScript代码，由&lt;script&gt;双边标记来引入程序代码。</p>
+<p>认识第一个 JavaScript 代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">document.write(&quot;你好！&quot;);               //作用：在&lt;body&gt;中输出一句话</span><br><span class="line">document.write(&quot;&lt;h1&gt;我是一级标题&lt;/h1&gt;&quot;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>常用的两个客户端输出方法：</p>
+<blockquote>
+<p><strong>document.write(“String”);</strong></p>
+</blockquote>
+<ul>
+<li>作用：在网页的&lt;script&gt;标记，输出内容</li>
+<li>document：是一个文档对象，代表整个网页</li>
+<li>write()：是 document 对象的一个输出方法</li>
+<li>“.”小数点：通过小数点来调用对象的方法</li>
+<li>String：字符串类型，写入需要输出的内容</li>
+</ul>
+<blockquote>
+<p><strong>window.alert(“String”);</strong></p>
+</blockquote>
+<ul>
+<li>作用：在当前窗口中弹出一个警告对话框</li>
+<li>window：代表当前浏览器窗口</li>
+<li>alert()：弹出一个对话框，是 window 窗口对象的一个方法</li>
+<li>String：字符串类型，表示要显示的内容<br><br></li>
+</ul>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><hr>
+<p>每个语言中都有自己的注释，即用来提示这段代码是起到什么作用的。</p>
+<p><strong>HTML中的注释：</strong></p>
+<blockquote>
+<p><em>&lt;!-- 注释内容 --&gt;</em></p>
+</blockquote>
+<p><strong>CSS中的注释：</strong></p>
+<blockquote>
+<p>/* 注释内容 */</p>
+</blockquote>
+<p><strong>JavaScript的注释：</strong></p>
+<blockquote>
+<p>// 单行注释<br>/* 多行注释 */</p>
+</blockquote>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><hr>
+<p>变量，是计算机语言中能储存计算结果或能表示值抽象概念。用于让你能够把程序中准备使用的每一段数据都赋给一个简短、易于记忆的名字，因此它们十分有用。</p>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><hr>
+<p>变量本身是没有类型的，变量的类型来自于变量的值。</p>
+<p><strong>基本概念：</strong></p>
+<ul>
+<li>变量是变化的一个量</li>
+<li>变量可以看成是一个”未知数”，x=10</li>
+<li>变量可以看成是一个”符号”、”代号”</li>
+<li>变量可以形象的看成是宾馆的”房间号”</li>
+<li>变量一般是指程序的数据</li>
+<li>变量是在内存中<font color="red">临时存在</font>和运行的数据</li>
+<li>内存可以看成是一个个”小格子”，每个格子可以储存一个变量的名称和值</li>
+</ul>
+<p><strong>如图：</strong><br><img src="https://i.loli.net/2018/08/18/5b77107dba6bd.png" alt="20180818021312.png"></p>
+<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><hr>
+<p>变量的声明，相当于预定宾馆的”房间”。声明变量是使用系统关键字 var 来进行的。</p>
+<p><strong>语法格式：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var 变量名 = 变量值;</span><br></pre></td></tr></table></figure></p>
+<p><strong>Demo：</strong></p>
+<ul>
+<li>var name; &emsp;//声明一个变量</li>
+<li>var name,sex,edu;&emsp;//同时声明多个变量，多个变量间用英文下的逗号隔开</li>
+<li>var name = “张三”; &emsp;//一边声明一边赋值</li>
+</ul>
+<h3 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h3><hr>
+<p><strong>命名规则：</strong></p>
+<ul>
+<li>变量名可以包含字母、数字、下划线</li>
+<li>变量的名称一定要有意义</li>
+<li>变量名不能以数字开头，可以以字母或下划线开头。如：var 2name;(错误写法)</li>
+<li>变量名不能是系统关键字，如：var、switch、for、try、case、else、while等。</li>
+<li>JavaScript 中的变量名是<font color="red">区分大小写</font>的，如：name 和 Name 是两个变量</li>
+<li>JavaScript 中每条语句一般以英文下的分号(;)结束，这个分号不是必须的，为了向 PHP 兼容最好加上分号</li>
+<li><strong>如果变量名由多个单词构成的话，该如何表示？</strong><ul>
+<li><font size="2" color="#CD3278">“驼峰式命名”：第一个单词全小写，后面每一个单词首字母大写，如：var getUserName</font></li>
+<li><font size="2" color="#CD3278">“下划线命名”：所有单词全小写，中间用下划线连接，如：var get_user_name</font><br></li>
+</ul>
+</li>
+</ul>
+<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><hr>
+<p>给变量赋值，就是往”空间”中装东西。使用赋值号 “=” 来给变量赋值。</p>
+<p>“=”的理解：将 “=” 右边的”运算结果”赋值给左边的变量名，右边先运算，运算结果赋值给左边的变量。<font color="red">“=” 左边只能是一个变量名称，而不能是 “运算表达式”。</font><br></p>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var name = &quot;张三&quot;;    //声明变量：name，值为：张三</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意事项：</strong>一个变量名本身是没有类型的，只有给它赋了值，这时候变量才有类型。</p>
+<h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><hr>
+<p>变量的数据类型，是指这个类型来源于”变量的值”，换句话说：值是什么类型，变量就是什么类型。</p>
+<p><strong>数据类型有：</strong>数值型、字符型、布尔型、未定义型(undefined)、空型(null)、数组(array)、对象(object)、函数(function)</p>
+<p>变量的数据类型，分两大类：</p>
+<ul>
+<li>基本数据类型：数值型、字符型、布尔型、未定义型、空型(变量名只能存一个值)</li>
+<li>引用数据类型：数组、对象、函数(变量名可能存多个值)</li>
+</ul>
+<h4 id="数值型"><a href="#数值型" class="headerlink" title="数值型"></a>数值型</h4><hr>
+<p>可以进行算术运算的(四则运算)，数值型包括：整型(整数)、浮点型(小数)、<sup>*</sup>NaN。</p>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = 10;</span><br><span class="line">var a = 0;</span><br><span class="line">var a = -0.9;</span><br><span class="line">var b = a * 10;</span><br></pre></td></tr></table></figure></p>
+<p>数值型中还有一个比较特殊的值：<strong>NaN</strong>(not a number) <font size="2">//不是一个数字</font><br>当将其他数据类型，转成数值型时转不过去，但程序又不能报错，这时将返回一个NaN值。</p>
+<h4 id="字符型"><a href="#字符型" class="headerlink" title="字符型"></a>字符型</h4><hr>
+<p>用单引号或双引号，引起来的一串字符。</p>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a = &quot;hello&quot;;</span><br><span class="line">var b = &quot;world&quot;;</span><br><span class="line">var c = a + b;        //这里的&quot;+&quot;是连接号，而不是加法</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>如果 “+” 左右两个操作数都是数值的话，将执行”加法运算”</li>
+<li>如果 “+” 左右有一个操作数是字符的话，那么将另一个值将转换成字符串，再进行”连接运算”</li>
+<li>运算时只能进行相同类型运算，如果类型不同将进行类型转换成相同类型。</li>
+</ul>
+<p><strong><em>什么是转义字符？</em></strong><br>当用一些普通字符的组合来代替一些特殊字符，由于其组合改变了原来字符表示的含义，因此称为“转义”。<br>也就是当浏览器遇到反斜杠()时，将会对其后的字符进行普通字符对待。</p>
+<p><strong>常用的转义字符有：</strong>\’、\”、\、\r、\n等. . .</p>
+<p>如果想在双引号内再嵌套双引号，则需要进行转义(\”)</p>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var name = &quot;张三&quot;;</span><br><span class="line"></span><br><span class="line">var str = &quot;&quot;;</span><br><span class="line">var str += &quot;&lt;h1&gt;\&quot;&quot;+name+&quot;\&quot;的基本信息&lt;/h1&gt;&quot;;</span><br><span class="line"></span><br><span class="line">document.write(str);</span><br></pre></td></tr></table></figure></p>
+<h4 id="布尔型"><a href="#布尔型" class="headerlink" title="布尔型"></a>布尔型</h4><hr>
+<p>布尔型又称逻辑型，只有两个值：true(真)、false(假)。<br>布尔型只有两个状态：如：性别、开关、黑白名单等. . .</p>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = true;</span><br><span class="line">var b = false;</span><br></pre></td></tr></table></figure></p>
+<p>布尔型常用在 if 条件判断语句中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if(条件判断)&#123;</span><br><span class="line">    document.write(&quot;条件为true，将执行该代码&quot;);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    document.write(&quot;条件为false，将执行该代码&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>if 是系统关键字，必须全小写</li>
+<li>() 小括号中，是条件判断语句，判断的结果只有两种可能：true 或 false</li>
+<li>{} 大括号中，是条件为true时，将执行的程序代码</li>
+</ul>
+<h4 id="未定义型"><a href="#未定义型" class="headerlink" title="未定义型"></a>未定义型</h4><hr>
+<p>当一个变量定义但<strong>未赋值</strong>时，将返回未定义型，未定义型的值只有一个undedined。<br>当一个对象的属性不存在，也返回未定义型。</p>
+<p><img src="https://i.loli.net/2018/08/20/5b799a7ab7a16.png" alt="5b799a7a.png"></p>
+<h4 id="空型"><a href="#空型" class="headerlink" title="空型"></a>空型</h4><hr>
+<p>当一个对象不存在时，将返回空型，空型的值只有一个null。<br>也可以理解为：是一个对象的占位符。</p>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = 100;</span><br><span class="line">var a = null;    //清除变量的值，赋一个null值</span><br></pre></td></tr></table></figure></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><hr>
+<p>JavaScript中一些常用对象的方法。</p>
+<h3 id="window-prompt"><a href="#window-prompt" class="headerlink" title="window.prompt()"></a>window.prompt()</h3><hr>
+<p>在窗口中弹出输入框，获取用户输入的内容。<br><img src="https://i.loli.net/2018/08/21/5b7b0ea2b10d9.png" alt="20180821025454.png"></p>
+<p><strong>Demo:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var name = window.prompt(&quot;请输入你的名字:&quot;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="数据类型、运算符"><a href="#数据类型、运算符" class="headerlink" title="数据类型、运算符"></a>数据类型、运算符</h2><hr>
+<p>当两个不同的数据类型进行运算时，需要将类型转换才能进行运算。<br>变量的类型转换一般情况由 Javascript 自动转换的，但有些时候需要手动进行转换。</p>
+<h4 id="布尔型转换"><a href="#布尔型转换" class="headerlink" title="布尔型转换"></a>布尔型转换</h4><hr>
+<p>将其他数据类型转换成布尔型的结果。</p>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var a = &quot;abc&quot;;        //true</span><br><span class="line">var a = -0.3;         //true</span><br><span class="line">var a = &quot;&quot;;           //false</span><br><span class="line">var a = 0;            //false</span><br><span class="line">var a = NaN;          //false</span><br><span class="line">var a = undefined;    //false</span><br><span class="line">var a = null;         //false</span><br><span class="line"></span><br><span class="line">var result = Boolean(a);    //使用Boolean()全局函数，强制转成布尔型</span><br><span class="line">document.write(a);</span><br></pre></td></tr></table></figure></p>
+<h4 id="字符型转换"><a href="#字符型转换" class="headerlink" title="字符型转换"></a>字符型转换</h4><p>将其他数据类型(字符型除外)转换成字符型的结果。</p>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var a = true;         //&quot;true&quot;</span><br><span class="line">var a = 0;            //&quot;0&quot;</span><br><span class="line">var a = NaN;          //&quot;NaN&quot;</span><br><span class="line">var a = undefined;    //&quot;undefined&quot;</span><br><span class="line">var a = null;         //&quot;null&quot;</span><br><span class="line"></span><br><span class="line">var result = String(a);    //使用String()全局函数，强制转成字符型</span><br><span class="line">document.write(a);</span><br></pre></td></tr></table></figure></p>
+<h4 id="数值型转换"><a href="#数值型转换" class="headerlink" title="数值型转换"></a>数值型转换</h4><p>将其他数据类型转换成数值型的结果。</p>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var a = true;         //1</span><br><span class="line">var a = &quot;120px&quot;;      //NaN</span><br><span class="line">var a = 100;          //100</span><br><span class="line">var a = &quot;&quot;;           //0</span><br><span class="line">var a = undefined;    //NaN</span><br><span class="line">var a = null;         //0</span><br><span class="line"></span><br><span class="line">var resuelt = Number(a);    //使用Number()全局函数，强制转成字符型</span><br><span class="line">document.write(a);</span><br></pre></td></tr></table></figure></p>
+<h4 id="typeof"><a href="#typeof" class="headerlink" title="typeof()"></a>typeof()</h4><hr>
+<p>typeof操作符可以测试一个变量的类型，测试的结果是一个<strong>类型字符串</strong>。<br>tyoeof有两种写法：typeof(a) 或 typeof a。</p>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a = &quot;abc&quot;;</span><br><span class="line"></span><br><span class="line">document.write(&quot;类型：&quot;+typeof(a)+&quot;内容：&quot;+a);</span><br></pre></td></tr></table></figure></p>
+<p>typeof()的结果字符串有六种情况：</p>
+<blockquote>
+<p>“string”、”number”、”boolean”、”undedined”、”object”、”function”</p>
+</blockquote>
+<p>另外：null、对象、数组这三种类型，都将返回”object”。</p>
+<h4 id="parseInt"><a href="#parseInt" class="headerlink" title="parseInt()"></a>parseInt()</h4><hr>
+<p>功能：在一个字符串中<font color="red">从左往右</font>提取整型，如果遇到<strong>非整型内容</strong>则停止提取并返回结果。</p>
+<p>注意：如果第一个字符就是非整型，则立即停止并返回NaN。</p>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">parseInt(&quot;120px&quot;) = 120</span><br><span class="line">parseInt(&quot;120.98&quot;) = 120    //小数点不是整数</span><br><span class="line">parseInt(&quot;a120px&quot;) = NaN</span><br></pre></td></tr></table></figure></p>
+<h4 id="parseFloat"><a href="#parseFloat" class="headerlink" title="parseFloat()"></a>parseFloat()</h4><hr>
+<p>功能：在一个字符串中<font color="red">从左往右</font>提取浮点型，如果遇到<strong>非浮点型内容</strong>则停止提取并返回结果。</p>
+<p>注意：如果第一个字符就是非浮点型，则立即停止并返回NaN。</p>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">parseFloat(&quot;120px&quot;) = 120</span><br><span class="line">parseFloat(&quot;120.98&quot;) = 120.98</span><br><span class="line">parseFloat(&quot;.98&quot;) = 0.98</span><br><span class="line">parseFloat(&quot;a.98&quot;) = NaN</span><br></pre></td></tr></table></figure></p>
+<h4 id="算数运算符"><a href="#算数运算符" class="headerlink" title="算数运算符"></a>算数运算符</h4><hr>
+<p>当需要进行各种各样的运算时，就需要使用不同的运算符号。<br>常见的算数运算符：</p>
+<blockquote>
+<p>+、-、*、/、%、++、–</p>
+</blockquote>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = 1 + 2;     //值：3</span><br><span class="line">a = 10 * 3;    //值：30</span><br><span class="line">a = 10 / 2;    //值：5</span><br><span class="line">a = 10 % 3;    //这里的&quot;%&quot;为求余数，值：1</span><br></pre></td></tr></table></figure></p>
+<p><strong>“+ +”、”- -“运算符：</strong>加1运算符，自己加1，也可称为自增1、自减1。</p>
+<ul>
+<li>“+ +”、”- -“可以作前缀(++i)，也可以作后缀(i++)&emsp;<font size="2">//这里的i为变量</font></li>
+<li>不赋值(本身)的情况下，++i 和 i++的结果是一样的，反之如果赋值结果就不一样了</li>
+</ul>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = 10;    //值：10</span><br><span class="line">var b = a++;   //值：10，先将变量a = 10赋值给b,此时的b = 10，a的自增加1，则a = 11</span><br><span class="line">var c = ++a;   //值：12，此时a = 11，++a先增1再赋值给c，则a = 12</span><br><span class="line">var d = a--;   //值：12，此时a = 12，则d = 12，d赋值后a自减，a = 11</span><br><span class="line">var e = --a;   //值：10，此时a = 11，则e = 10，a = 10</span><br></pre></td></tr></table></figure></p>
+<h4 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h4><hr>
+<p>常见的赋值运算符：</p>
+<blockquote>
+<p>=、+=、-=、*=、/=</p>
+</blockquote>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">a += 10;      //先加后等：a = a + 10</span><br><span class="line">a -= 10;      //先减后等：a = a - 10</span><br><span class="line">a *= 10;      //先乘后等：a = a * 10</span><br></pre></td></tr></table></figure></p>
+<h4 id="字符串运算符"><a href="#字符串运算符" class="headerlink" title="字符串运算符"></a>字符串运算符</h4><hr>
+<p>将字符串进行所谓的”连接”运算，不能进行其他运算。</p>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = &quot;hello&quot;;       //&quot;hello&quot;</span><br><span class="line">var b = a + &quot;world&quot;;   //&quot;helloworld&quot;</span><br><span class="line">var c = &quot;abc&quot;;         //&quot;abc&quot;</span><br><span class="line">c += 10;               //&quot;abc10&quot;</span><br></pre></td></tr></table></figure></p>
+<h4 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h4><hr>
+<p>常见的比较运算符：</p>
+<blockquote>
+<p>>、&lt;、&gt;=、&lt;=、==、!=、===、!=\=</p>
+</blockquote>
+<p>比较运算符的结果是布尔值(true 或 false)。<br>比较运算符常用于条件判断中，比如：if、for、while</p>
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>“=” 是赋值号，如a = 10</li>
+<li>“==” 比较两个变量的值，<font color="red">不管类型</font>，只要值一样就返回true，反之false</li>
+<li>“===” 是全等于，<font color="red">既比较值，也判断类型</font>，如果值和类型都相同则返回ture，反之false</li>
+</ul>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = 10 &gt; 20;       //false</span><br><span class="line">a = 20 &gt;= 20;      //true</span><br><span class="line">a = 10%2 == &quot;0&quot;;   //true</span><br><span class="line">a = 10%3 != 0;     //true</span><br><span class="line">a = 10%2 === &quot;0&quot;;  //false</span><br></pre></td></tr></table></figure></p>
+<h4 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h4><hr>
+<p>常见的逻辑运算符：</p>
+<blockquote>
+<p>&amp;&amp;、||、!</p>
+</blockquote>
+<p>逻辑运算符的运算结果有两个 true 或 false。</p>
+<ul>
+<li>“&amp;&amp;”：逻辑与，如果左右两个操作数(两个条件)都为true，则结果为true，反之为false<br><img src="https://i.loli.net/2018/08/21/5b7b07d8f0933.png" alt="20180821022606.png"></li>
+<li>“||”：逻辑或，左右两个操作数，只要有一个(条件)满足，则结果为true，反之为false</li>
+<li>“!”：取反运算，如：!true = false，!false = true，!100(false) = false</li>
+</ul>
+<h4 id="三元运算符"><a href="#三元运算符" class="headerlink" title="三元运算符"></a>三元运算符</h4><hr>
+<p>所谓”三元运算符”就是指三个操作数。<br>含义：如果条件为true，则执行”结果1”的代码，反之条件为false将执行”结果2”的代码</p>
+<p><strong><em>三元运算符，就是 if else 的变形形式</em></strong></p>
+<p><strong>语法格式：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">条件表达式 ? 结果1:结果2</span><br><span class="line"></span><br><span class="line">var a = 10;</span><br><span class="line">var b = 20;</span><br><span class="line">var max = a&gt;b? a : b;</span><br></pre></td></tr></table></figure></p>
+<h4 id="特殊运算符"><a href="#特殊运算符" class="headerlink" title="特殊运算符"></a>特殊运算符</h4><hr>
+<p>比较特殊的运算符：</p>
+<blockquote>
+<p>new、delete、typeof、(.)、[]</p>
+</blockquote>
+<ul>
+<li>new 运算符：创建一个对象，如：var a = new Date();&emsp;//创建一个当前 系统日期时间对象</li>
+<li>delete 运算符：删除数组的元素，或者对象的属性</li>
+<li>typeof 运算符：一元运算符，上边已经介绍过，主要用来判断变量类型</li>
+<li>(.)点运算符：主要应用在对象中，通过点运算符(.)去调用属性或方法如：window.alert(“hello”);</li>
+<li>[]中括号：主要用来访问数组元素，如：arr[0] = 100;&emsp;//找到下标为0的元素并重新赋值</li>
+</ul>
+<h4 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h4><hr>
+<p>运算符中区分运算的先后顺序。</p>
+<p><img src="https://i.loli.net/2018/08/22/5b7c3ea4dc0b6.png" alt="20180822003216.png"></p>
+<h3 id="条件判断、循环语句"><a href="#条件判断、循环语句" class="headerlink" title="条件判断、循环语句"></a>条件判断、循环语句</h3><hr>
+<h4 id="if-条件判断"><a href="#if-条件判断" class="headerlink" title="if 条件判断"></a>if 条件判断</h4><p>描述：条件成立，执行成立(true)下的代码，反之执行不成立(fasle)下的代码。</p>
+<p><strong>结构一：</strong>只判断真，条件为假时什么也不做<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(条件判断)&#123;</span><br><span class="line">    条件为真，执行的代码;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>结构二：</strong>既判断真，也判断假<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if(条件判断)&#123;</span><br><span class="line">    条件为真，执行的代码;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    条件为假，执行的代码;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>结构三：</strong>多条件判断<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if(条件1判断)&#123;</span><br><span class="line">    条件1为真，执行的代码;</span><br><span class="line">&#125;else if(条件2判断)&#123;</span><br><span class="line">    条件2为真，执行的代码;</span><br><span class="line">&#125;else if(条件3判断)&#123;</span><br><span class="line">    条件2为真，执行的代码;</span><br><span class="line">&#125;else｛</span><br><span class="line">    所有条件不满足将执行的代码;</span><br><span class="line">｝</span><br></pre></td></tr></table></figure></p>
+<p><font color="red" size="2">注意：虽然有多个条件，但各条件之间是”或”的关系。而且只能有一个条件成立，不能同时满足多个条件。</font><br></p>
+<h4 id="switch-分支语句"><a href="#switch-分支语句" class="headerlink" title="switch 分支语句"></a>switch 分支语句</h4><hr>
+<p>描述：根据一个变量的不同取值，来执行不同的代码。</p>
+<p><strong>结构说明：</strong></p>
+<ul>
+<li>switch、case、break、default都是系统关键字，都必须全小写</li>
+<li>switch 后的小括号()：小括号内一般是一个变量名，这个变量可能有不同的取值</li>
+<li>每个 case 的值，与变量的值进行比对，如果一致就执行该 case 后的代码</li>
+<li>所有的 case 都是”或”的关系，只能有一个 case 会满足条件</li>
+<li>每个 case 中的代码执行完毕后，必须要用 break 语句结束，结束后程序将跳到 switch 结束大括号之后运行</li>
+<li><font color="red">如果不写 break 语句，下边所有 case 语句都会执行一遍</font><br></li>
+</ul>
+<p><strong>语法结构：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">switch(条件判断)</span><br><span class="line">&#123;</span><br><span class="line">    case 值1：</span><br><span class="line">         代码1;</span><br><span class="line">         break;</span><br><span class="line">    case 值2：</span><br><span class="line">         代码2;</span><br><span class="line">         break;</span><br><span class="line">    default:</span><br><span class="line">         如果以上条件都不满足，则执行该代码;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>if 多条件判断和 switc 的区别？</em></strong><br>if 中的条件一般是一个范围(a &gt; 100)，而 switch 中的条件一般是一个变量的不同取值。</p>
+<h4 id="while-循环"><a href="#while-循环" class="headerlink" title="while 循环"></a>while 循环</h4><hr>
+<p>描述：只要条件成立，就重复不断的执行循环体代码。</p>
+<p><strong>结构说明：</strong></p>
+<ul>
+<li>在循环开始前，必须要对变量初始化(声明变量并给初始值)</li>
+<li>如果 while 的条件为 true，则会不断重复执行循环体中的代码</li>
+<li>在循环体中，必须要有 “变量更新” 的语句，否则造成<font color="red">死循环</font><br><br><br><strong>语法结构：</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while(条件判断)</span><br><span class="line">&#123;</span><br><span class="line">    条件为true，则执行循环体代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="for-循环"><a href="#for-循环" class="headerlink" title="for 循环"></a>for 循环</h4><hr>
+<p>描述：当处理比较简单的循环是，可以使用 for 循环</p>
+<p><strong>结构说明：</strong></p>
+<ul>
+<li>变量初始化，在循环开始前执行一次，以后永远不再执行了</li>
+<li>条件判断，如果条件为 true，则重复执行循环体代码，否则退出循环</li>
+<li>循环体代码，循环体代码执行完毕后，程序立即跳到”变量更新”模块执行</li>
+<li>变量更新，为了避免死循环，i++执行完成后，程序将跳到 i &lt;= 10 条件判断，开始下一次循环</li>
+</ul>
+<p><strong>语法结构：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for(变量初始化;条件判断; 变量更新)</span><br><span class="line">&#123;</span><br><span class="line">    循环体代码;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="break-语句"><a href="#break-语句" class="headerlink" title="break 语句"></a>break 语句</h4><hr>
+<p>描述：当执行循环语句时，用于无条件(强制)结束当前循环语句</p>
+<p><strong>结构说明：</strong></p>
+<ul>
+<li>一般情况下，需要在 break 语句之前加一个条件判断</li>
+</ul>
+<p><strong>Demo：</strong><br><img src="https://i.loli.net/2018/08/23/5b7e697e9fa51.png" alt="20180823155919.png"></p>
+<h4 id="continue-语句"><a href="#continue-语句" class="headerlink" title="continue 语句"></a>continue 语句</h4><hr>
+<p>描述：当执行循环语句时，用于结束本次循环而开始下一次循环</p>
+<p><strong>结构说明：</strong></p>
+<ul>
+<li>一般情况下，需要在 continue 语句之前加一个条件判断</li>
+</ul>
+<p><strong>Demo：</strong><br><img src="https://i.loli.net/2018/08/23/5b7e6c0a450d8.png" alt="20180823161030.png"></p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><hr>
+<p>所谓数组,是有序的元素序列。若将有限个类型相同的变量的集合命名，那么这个名称为数组名。组成数组的各个变量称为数组的分量，也称为数组的元素，有时也称为下标变量。</p>
+<h4 id="数组概念"><a href="#数组概念" class="headerlink" title="数组概念"></a>数组概念</h4><hr>
+<p>描述：一组数的集合，称为”数组”，”数组”里边拥有多个的变量集合，称为”元素”。</p>
+<p><strong>语法结构：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var array = [元素1,元素2,元素3...];</span><br></pre></td></tr></table></figure></p>
+<h4 id="数组索引"><a href="#数组索引" class="headerlink" title="数组索引"></a>数组索引</h4><hr>
+<p>描述：数组中有多个值，每个值都有一个”编号”，通过”编号”可以访问到数组中的每个值。<br>数组中的”编号”又称：”下标”或索引号。使用数组的目的就是<font color="red">用循环遍历元素很方便</font>。</p>
+<p><font size="2">所谓”下标”是数组中从0开始的正整数，换句话说，第一个元素的下标为0，第二个元素的下标为1，以此类推. . .</font><br></p>
+<p><strong>注意：</strong>第1个数组元素的下标一定是0，最后一个数组元素的下标是：<font color="red">长度 - 1</font><br></p>
+<h4 id="元素访问"><a href="#元素访问" class="headerlink" title="元素访问"></a>元素访问</h4><hr>
+<p>描述：当需要对元素的访问、删除或修改就需要通过访问数组来实现。</p>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr = [&quot;张三&quot;,&quot;李四&quot;,18];</span><br><span class="line">window.alert(arr[2]);           //数组变量名后跟中括号，括号内容为元素下标</span><br><span class="line">arr[2] = &quot;王五&quot;;                 //对下标为2的元素进行重新赋值(修改)</span><br></pre></td></tr></table></figure></p>
+<h4 id="数组长度"><a href="#数组长度" class="headerlink" title="数组长度"></a>数组长度</h4><hr>
+<p>描述：指数组中元素的总个数。</p>
+<p><strong>语法结构：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1,2,3,5,8];          //当前数组数为：5</span><br></pre></td></tr></table></figure></p>
+<h4 id="数组创建"><a href="#数组创建" class="headerlink" title="数组创建"></a>数组创建</h4><hr>
+<p>描述：创建数组有几种方法。<br>数组元素的值，可以是任何类型，如：字符、数值、布尔、数组、对象、函数。</p>
+<ul>
+<li>使用 new 关键字和 Array() 来创建数组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var arr = new Array();                    //创建一个空数组</span><br><span class="line">var arr = new Array(&quot;张三&quot;,&quot;赵六&quot;);        //创建数组同时直接初始化数组的元素</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 [] 中括号方式创建一个数组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var arr = [10,20,30,40];</span><br></pre></td></tr></table></figure>
+<h4 id="数组操作"><a href="#数组操作" class="headerlink" title="数组操作"></a>数组操作</h4><hr>
+<p>对数组的操作包括(增、删、改、查)。</p>
+<ul>
+<li>读取元素：读取已经存在下标的元素，如：var result = arr[2];</li>
+<li>修改元素：修改已经存在下标的元素值(重新赋值)，如：arr[2] = 18;</li>
+<li>添加元素：添加一个不存在的下标的元素。&emsp;//<font size="2">添加元素只能往后添加，数组对象可以添加任意位置</font></li>
+<li>删除元素：删除数组中某个已经存在下标的元素，如delete arr[2];&emsp;//<font size="2">元素值被删除下标还存在</font><br></li>
+</ul>
+<p><strong>拓展：数组对象属性 length</strong><br>描述：一个数组其实就是一个”数组对象”，把数组看成”对象，是为了使用数组对象的属性或方法。<br>那么，length 就是数组对象的一个属性，如：var result = arrayObject.length;</p>
+<p><strong>Demo：</strong><br><img src="https://i.loli.net/2018/08/24/5b8010f190a71.png" alt="20180824220143.png"></p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><hr>
+<p>函数，是将一段公共的代码进行封装，给它起个名字叫”函数”。它的作用是<font color="red">一次定义，多次调用</font>，省去了代码的重写。例如：用户名的验证，验证码验证、邮箱验证、手机号码验证等. . .</p>
+<p><strong>例如：</strong>判断两个数的大小，只需封装代码结构之后调用<br><img src="https://i.loli.net/2018/08/26/5b82bf359ddf1.jpg" alt="20180826225351.jpg"></p>
+<p><strong>定义格式：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function 函数名称(参数1,参数2,...)&#123;</span><br><span class="line">	函数功能代码;</span><br><span class="line">    return 参数N</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><hr>
+<ul>
+<li>function ：为系统关键字，全小写</li>
+<li>函数名称：创建函数时需要定义一个名称，命名规则与变量命名一样</li>
+<li>( )：是定义函数时需要接收数据的参数，按具体情况分析是否有参(可有可无)</li>
+<li>在参数中，不需要声明，直接使用</li>
+<li>在参数中，形参的名称与变量的命名规则一样。且<font color="red">形参不能用 “var” 关键字</font>定义<ul>
+<li><font size="2" color="#CD3278">型参(形式参数)：参数里用形象的概念表示的参数，作用是来接收调用者传过来的数据，与变量相似</font></li>
+<li><font size="2" color="#CD3278">实参(实际参数)：参数里实实在在的数据值，传递过来的真实数据</font></li>
+</ul>
+</li>
+<li>函数功能代码：定义函数名称后紧跟着的是{ }中的函数代码</li>
+<li>return：用于向函数调用者返回一个值，并立即结束函数的运行<ul>
+<li><font size="2" color="#CD3278">return 用于终止函数的运行</font></li>
+<li><font size="2" color="#CD3278">break 用于终止各种循环的运行</font><br></li>
+</ul>
+</li>
+</ul>
+<h4 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h4><hr>
+<p>函数定义完成后是不会自动执行的，那么必须要调用函数才会执行结果。<br>函数的调用：直接写函数名，如果有参数则写参数。</p>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//定义</span><br><span class="line">function opWindow(result)&#123;</span><br><span class="line">	window.alert(&quot;Hello!&quot;+ result);</span><br><span class="line">&#125;</span><br><span class="line">//调用</span><br><span class="line">opWindow(&quot;世界&quot;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>形参的个数，要与实参的个数一致</li>
+<li>形参的顺序，也要与实参的顺序保持一致</li>
+</ul>
+<h4 id="变量-1"><a href="#变量-1" class="headerlink" title="变量"></a>变量</h4><hr>
+<p>在函数中，变量分为：全局变量、局部变量。</p>
+<ul>
+<li>全局变量：可以在网页的任何地方(函数内、外部)使用的变量，称为”全局变量”<ul>
+<li><font size="2" color="#CD3278">在函数外部定义的变量，就是”全局变量”</font></li>
+<li><font size="2" color="#CD3278">“全局变量”既可以在函数外使用，也可以在函数内部使用</font></li>
+<li><font size="2" color="#CD3278">“全局变量”在网页关闭时，自动消失(释放空间)</font></li>
+</ul>
+</li>
+<li>局部变量：只能在函数内部使用的变量，称为”局部变量”<ul>
+<li><font size="2" color="#CD3278">“局部变量”在函数内部定义，在函数内部使用，则在函数外无法使用</font></li>
+<li><font size="2" color="#CD3278">“局部变量”在函数执行完毕就消失了</font><br><br></li>
+</ul>
+</li>
+</ul>
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>在函数内部，省略关键字 var 定义的变量为 “全局变量”</li>
+<li>var 关键字尽量别省略，省略后 “全局变量” 和 “局部变量” 无法区分</li>
+</ul>
+<h4 id="拷贝传值"><a href="#拷贝传值" class="headerlink" title="拷贝传值"></a>拷贝传值</h4><hr>
+<p>拷贝传值：将一个变量的值”拷贝”一份，传给了另一个变量。两者没有任何联系，起到复制作用。<br>拷贝传值中，两个变量之间没有任何联系，修改其中一个变量的值，另一个不会改变。</p>
+<p><strong><em>基本数据类型存在于”栈内存”中，因为基本数据类型只有一个变量名和变量值。</em></strong></p>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a = 10;        //创建变量a</span><br><span class="line">var b = a;         //&quot;拷贝&quot;赋给变量b</span><br><span class="line">a = 100;           //a重新赋值</span><br><span class="line"></span><br><span class="line">alert(b);</span><br><span class="line">alert(a);</span><br></pre></td></tr></table></figure></p>
+<h4 id="引用传值"><a href="#引用传值" class="headerlink" title="引用传值"></a>引用传值</h4><hr>
+<p>引用传值：将一个变量的数据地址”拷贝”一份，传给了另一个变量。两者是有联系的，起到<br>引用传值中，两个变量指向”同一个地址”，大家共享同一份数据，如果其中一个变量值发生改变则另一个变量值也发生改变。</p>
+<p><strong><em>引用数据类型存在于”栈内存”中，因为引用数据类型有多个值，将地址传入参数中。</em></strong></p>
+<p>引用数据类型的存储分两步：</p>
+<ul>
+<li><font color="red">变量名</font>和<font color="red">内存地址</font>存在”快速内存” <font color="red">“栈内存”</font> 中</li>
+<li><font color="red">数据</font>存在”满速内存” <font color="red">“堆内存”</font> 中</li>
+</ul>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;&quot;张三&quot;,24,&quot;男&quot;&#125;;    //创建数组对象变量a</span><br><span class="line">var b = a;                    //将变量a的内存地址赋给b</span><br><span class="line">a[1] = 18;                    //a重新赋值</span><br><span class="line"></span><br><span class="line">alert(b[1]);                  //数组b的内存地址指向了数组a，数组a为18则b也为18</span><br><span class="line">alert(a[1]);                  //输出数组下标为1的值为：18</span><br></pre></td></tr></table></figure></p>
+<h4 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h4><hr>
+<p>没有名字的函数，不能单独定义也不能单独调用。<br>匿名函数一般是作为数据给其他变量赋值的，比如：普通变量、数组元素、对象属性赋值。</p>
+<p><strong><em>匿名函数的作用在于给实现一些功能比较小的代码进行封装，而不再重新命名定义函数，省去内存空间</em></strong></p>
+<p><strong>Demo：</strong><br><img src="https://i.loli.net/2018/08/27/5b840890f15b0.jpg" alt="20180827221824.jpg"></p>
+<h4 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h4><hr>
+<p>给一个数组元素，赋值一个数组的值，那么这个数组就是”二维数组”。<br>二维数组的经常用在两层循环中，与二维表格的循环一模一样，即循环套循环(九九乘法表)。</p>
+<p><strong><em>二维数组的访问：数组名后跟多个连续的中括号[ ]。第一个括号代表第一维数组，以此类推。</em></strong></p>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var arr = new Array();</span><br><span class="line">arr[0] = &quot;张三&quot;;</span><br><span class="line">arr[1] = [&quot;132xxx0314&quot;,&quot;guest@126.com&quot;];</span><br><span class="line"></span><br><span class="line">var str = arr[0]+&quot;的基本信息&quot;;</span><br><span class="line">str += &quot;手机号：&quot;+arr[1][0];</span><br><span class="line">str += &quot;邮箱：&quot;+arr[1][1];</span><br><span class="line"></span><br><span class="line">document.write(str);</span><br></pre></td></tr></table></figure></p>
+<h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><hr>
+<p>JavaScript 中的所有事物都是对象：字符串、数字、数组、日期，等等。<font color="red">对象是拥有”属性”和”方法”构成的数据。</font><br>对象是一种无序的集合数据类型，它由若干键值对组成。</p>
+<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><hr>
+<p>用形象的说法来描述：人就是一个”对象”，这个对象据有一些基本的特征比如身高、体重、姓名、性别、年龄、每个人可以有不同的本身(方法)如玩游戏、上班、开车等等. . .</p>
+<h4 id="大致分类"><a href="#大致分类" class="headerlink" title="大致分类"></a>大致分类</h4><hr>
+<p><img src="https://i.loli.net/2018/08/27/5b84168fc125d.jpg" alt="20180827231903.jpg"></p>
+<h4 id="自定义对象"><a href="#自定义对象" class="headerlink" title="自定义对象"></a>自定义对象</h4><hr>
+<p>描述：使用 new 关键字结合构造函数 Object() 来创建一个空的对象。</p>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var a = new Object();            //创建自定义对象</span><br><span class="line"></span><br><span class="line">a.name = &quot;张三&quot;;                 //添加属性</span><br><span class="line">a.sex = &quot;男&quot;;</span><br><span class="line">a.school;                        //定义属性但没赋值</span><br><span class="line"></span><br><span class="line">a.style = function()&#123;            //创建方法</span><br><span class="line">			alert(&quot;hello!&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">a.style();                       //调用方法</span><br></pre></td></tr></table></figure></p>
+<p>描述：使用大括号{ }来创建一个对象。</p>
+<p><strong>Demo：</strong><br><img src="https://i.loli.net/2018/08/27/5b841d5ccf448.jpg" alt="20180827234811.jpg"></p>
+<h4 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h4><hr>
+<p>在 JavaScript 中系统提供的对象，不需要自己编写可以直接调用。</p>
+<p>对象：</p>
+<ul>
+<li><strong>String</strong>：字符串对象，提供了对字符串进行操作的属性和方法</li>
+<li><strong>Array</strong>：数组对象，提供了数组操作的属性和方法</li>
+<li><strong>Date</strong>：日期对象，可以获取系统的日期时间信息</li>
+<li><strong>Boolean</strong>：布尔对象，一个布尔变量就是一个布尔对象(没有可用的属性和方法)</li>
+<li><strong>Number</strong>：数值对象，一个数值变量就是一个数值对象</li>
+<li><strong>Math</strong>：数学对象，提供了数学运算方面的属性和方法，如：绝对值、四舍五入</li>
+</ul>
+<h4 id="String属性、方法"><a href="#String属性、方法" class="headerlink" title="String属性、方法"></a>String属性、方法</h4><hr>
+<p>一些常见的 String 对象的属性和方法。</p>
+<ul>
+<li>length：获取字符串的长度，如：var len = str.length;</li>
+<li>toLowerCase()：将字符串中的字母转成全小写，如：str.toLowerCase();</li>
+<li>toUpperCase()：将字符串中的字母转成全大写，如：str.toUpperCase();</li>
+</ul>
+<ul>
+<li><strong>charAt(index)</strong>：返回指定下标位置的一个字符，如果没有找到则返回空字符串<ul>
+<li><font size="2" color="#CD3278">语法：str.charAt(index)</font></li>
+<li><font size="2" color="#CD3278">参数：index 是指定的一个索引号，根据 index 索引号来返回一个字符</font><br></li>
+</ul>
+</li>
+</ul>
+<p><strong>Demo：</strong><br><img src="https://i.loli.net/2018/08/28/5b856113be752.jpg" alt="20180828224921.jpg"></p>
+<ul>
+<li><strong>indexOf()</strong>：返回一个子字符串在原始字符串中的索引值(查找顺序从左往右)，如果没有找到则返回 -1<ul>
+<li><font size="2" color="#CD3278">语法：str.indexOf(sub);</font></li>
+<li><font size="2" color="#CD3278">参数：sub 代表要查找的一个子字符串</font><br></li>
+</ul>
+</li>
+</ul>
+<p><strong>Demo：</strong><br><img src="https://i.loli.net/2018/08/28/5b856563bd84d.jpg" alt="20180828230757.jpg"></p>
+<ul>
+<li><p><strong>lastIndexOf()</strong>：与 indexOf() 相似，区别在于查找顺序从右往左，如果没找到则返回 -1</p>
+<ul>
+<li><font size="2" color="#CD3278">语法：str.lastIndexOf(str);</font></li>
+<li><font size="2" color="#CD3278">参数：str代表要查找的子字符串</font><br></li>
+</ul>
+</li>
+<li><p><strong>substr()</strong>：在原始字符串，返回一个子字符串</p>
+<ul>
+<li><font size="2" color="#CD3278">语法：str.substr(startIndex[,length]);</font></li>
+<li><font size="2" color="#CD3278">说明：从下标 startIndex 起，返回 length 个字符</font></li>
+<li><font size="2" color="#CD3278">参数：startIndex 表示查找的起始索引号; length 可选，如果省略则返回几个字符</font><br></li>
+</ul>
+</li>
+</ul>
+<p><strong>Demo：</strong><br><img src="https://i.loli.net/2018/08/29/5b857a8ec9c3d.jpg" alt="20180829003637.jpg"></p>
+<ul>
+<li><strong>substring()</strong>：与 substr() 一样，返回一个子字符串<ul>
+<li><font size="2" color="#CD3278">语法：str.substring(startIndex[, endIndex]);</font></li>
+<li><font size="2" color="#CD3278">说明：返回从 startIndex 开始索引值到 endIndex 结束索引值之间的所有字符</font></li>
+<li><font size="2" color="#CD3278">参数：startIndex 代表开始索引值; endIndex 可选项，如果省略则返回到结尾的所有字符</font><br></li>
+</ul>
+</li>
+</ul>
+<p><strong>注意事项：</strong>如果省略第二个参数，那么 substr() 和 substring() 结果一样。</p>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/* 返回的字符包含 startIndex 处的字符，不包含 endIndex 处的字符 */</span><br><span class="line"></span><br><span class="line">&quot;abcdef&quot;.substring(2,3);    //值为：&quot;c&quot;</span><br><span class="line">&quot;abcdef&quot;.substr(2,3);    //值为：&quot;cde&quot;,从当前c往后数3位</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>split()</strong>：将一个字符串切割成若干段(返回一个数组)<ul>
+<li><font size="2" color="#CD3278">语法：str.split(分割号)</font></li>
+<li><font size="2" color="#CD3278">参数：参数是一个分割号的字符串，用指定的分割号将字符串切成若干段</font><br></li>
+</ul>
+</li>
+</ul>
+<p><strong>Demo：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/* 字符串切片显示日期 */</span><br><span class="line">var today = &quot;周日,周一,周二,周三,周四,周五,周六&quot;;</span><br><span class="line">var week = var Date();</span><br><span class="line">var arr = today.split(&quot;,&quot;);</span><br><span class="line"></span><br><span class="line">document.write(&quot;今天是：&quot;+arr[week]);</span><br></pre></td></tr></table></figure></p>
+<h4 id="Array属性、方法"><a href="#Array属性、方法" class="headerlink" title="Array属性、方法"></a>Array属性、方法</h4><hr>
+<p>一些常见的 Array 数组对象的属性和方法。<br>换句话说：一个数组变量，就是一个数组对象。</p>
+<ul>
+<li>length：动态获取数组长度，如 var len = arr.length();</li>
+<li>join：将一个数组转成字符串(返回一个字符串)，如 var str = arr.join(“,”);<ul>
+<li><font size="2" color="#CD3278">语法：str.join(连接号);</font></li>
+<li><font size="2" color="#CD3278">说明：将一个数组，用指定的”连接号”连接成一个字符串</font></li>
+</ul>
+</li>
+<li>reverse：将数组中各元素颠倒顺序，如 var str.reverse();</li>
+</ul>
+<p><strong><em>数组元素的删除和添加：</em></strong></p>
+<ul>
+<li>Dlete 运算符：只能删除数组元素的值，而<font color="red">所占空间还在并且总长度不变</font>(arr.length)</li>
+<li>shift()：删除数组中第一个元素，返回删除的那个值，且所占空间也相对减 1</li>
+<li>pop()：删除数组中最后一个元素，返回删除的那个值，且所占空间也相对减 1</li>
+<li>unshift()：在数组前添加一个或多个数组元素，长度要改变，如：arr.unshift(“a”,”b”…);</li>
+<li>push()：在数组结尾添加一个或多个数组元素，长度要改变，如：arr.unshift(“a”,”b”…);</li>
+</ul>
+<h4 id="Date属性、方法"><a href="#Date属性、方法" class="headerlink" title="Date属性、方法"></a>Date属性、方法</h4><hr>
+<p>Date 对象和 String 对象不太一样，定义了一字符串其实就是一个 String 对象，就可以直接调用其属性和方法。<br>Date 对象的使用，必须使用 new 关键字来创建，否则无法调用 Date 的属性和方法。</p>
+<p><strong>创建 Date 对象的方法</strong></p>
+<ul>
+<li>创建当前日期对象，不带参数：<ul>
+<li><font size="2" color="#CD3278">实例：var today = new Date();</font></li>
+</ul>
+</li>
+<li>创建指定时间戳日期对象，带参数(时间戳)：<ul>
+<li>时间戳：是指某一个具体时间与当前时间之间的相差的毫秒值</li>
+<li><font size="2" color="#CD3278">实例：var timer = new Date(10000);</font></li>
+</ul>
+</li>
+<li>创建一个字符串的日期时间信息，带参数(字符串)<ul>
+<li><font size="2" color="#CD3278">实例：var timer = new Date(“2015/1/1 10:00:00”);</font></li>
+</ul>
+</li>
+<li>指定多个数值参数：<ul>
+<li><font size="2" color="#CD3278">var timer = new Date(2015,4,25); &emsp;//顺序为年、月、日、时、分、秒</font></li>
+</ul>
+</li>
+<li>getFullYear()：获取四位的年份</li>
+<li>getMonth()：获取月份，取值为 0 ~ 11</li>
+<li>getDate()：获取日期， 取值为 1 ~ 31</li>
+<li>getHours()：获取小时</li>
+<li>getMinutes()：获取分钟</li>
+<li>getSeconds()：获取秒</li>
+<li>getMilliseconds()：获取毫秒</li>
+<li>getDay()：星期</li>
+<li>getTime()：毫秒值，获取距离 1970 年 1 月 1 日至今的毫秒值</li>
+</ul>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p><font size="2">原文作者: <a href="https://seekme.club">PoCo</a></font>
+            <p><font size="2">原文链接: <a href="https://seekme.club/2018/08/17/强化学习笔记《WEB前端快速巩固-JavaScript》/">https://seekme.club/2018/08/17/强化学习笔记《WEB前端快速巩固-JavaScript》/</a></font>
+            <p><font size="2">发表日期: <a href="https://seekme.club/2018/08/17/强化学习笔记《WEB前端快速巩固-JavaScript》/">August 17th 2018, 9:30:39</a></font>
+            <p><font size="2">版权声明: 本文采用<a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</font></p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/07/30/强化学习笔记《WEB前端快速巩固-CSS》/" title= 强化学习笔记《WEB前端快速巩固-CSS》 >
+                    <div class="prevTitle">强化学习笔记《WEB前端快速巩固-CSS》</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+<div id="container"></div>
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: '强化学习笔记《WEB前端快速巩固-JavaScript》', // 可选。默认为 location.href
+        owner: 'helGayhub233',
+        repo: 'helGayhub233.github.io',
+        oauth: {
+            client_id: '3c66712e51e3d8ed8be0',
+            client_secret: 'fd735ffcf79d41b00a0eeb5e9bef702a9089bc6b',
+        },
+    })
+    gitment.render('container')
+
+</script>
+
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+	<div>
+	<p class="copyright text-muted" style="font-size: 14px">
+	© 2018 PoCo's Blog <a href="https://hexo.io/" target="_blank"><span class="iconfont-archer power" style="color:#1E90FF"></span></a> Powered By Hexo <br />
+		<p align="center" style="font-size: 12px;color: #777777;font-family: 'Oswald-Regular';src=url('/themes/archer/source/font/')">Hosted by <a href="https://pages.coding.me" style="font-weight: bold;color: #777777">Coding Pages Site</a></p>
+	</div>
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lt-script-gt-标记"><span class="toc-number">2.</span> <span class="toc-text">&lt;script&gt;标记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注释"><span class="toc-number">3.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-number">4.</span> <span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-number">4.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#声明"><span class="toc-number">4.2.</span> <span class="toc-text">声明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#规则"><span class="toc-number">4.3.</span> <span class="toc-text">规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#赋值"><span class="toc-number">4.4.</span> <span class="toc-text">赋值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类型"><span class="toc-number">4.5.</span> <span class="toc-text">类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数值型"><span class="toc-number">4.5.1.</span> <span class="toc-text">数值型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符型"><span class="toc-number">4.5.2.</span> <span class="toc-text">字符型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#布尔型"><span class="toc-number">4.5.3.</span> <span class="toc-text">布尔型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#未定义型"><span class="toc-number">4.5.4.</span> <span class="toc-text">未定义型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#空型"><span class="toc-number">4.5.5.</span> <span class="toc-text">空型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法"><span class="toc-number">5.</span> <span class="toc-text">方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#window-prompt"><span class="toc-number">5.1.</span> <span class="toc-text">window.prompt()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型、运算符"><span class="toc-number">6.</span> <span class="toc-text">数据类型、运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#布尔型转换"><span class="toc-number">6.0.1.</span> <span class="toc-text">布尔型转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符型转换"><span class="toc-number">6.0.2.</span> <span class="toc-text">字符型转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数值型转换"><span class="toc-number">6.0.3.</span> <span class="toc-text">数值型转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#typeof"><span class="toc-number">6.0.4.</span> <span class="toc-text">typeof()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#parseInt"><span class="toc-number">6.0.5.</span> <span class="toc-text">parseInt()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#parseFloat"><span class="toc-number">6.0.6.</span> <span class="toc-text">parseFloat()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#算数运算符"><span class="toc-number">6.0.7.</span> <span class="toc-text">算数运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#赋值运算符"><span class="toc-number">6.0.8.</span> <span class="toc-text">赋值运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串运算符"><span class="toc-number">6.0.9.</span> <span class="toc-text">字符串运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#比较运算符"><span class="toc-number">6.0.10.</span> <span class="toc-text">比较运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#逻辑运算符"><span class="toc-number">6.0.11.</span> <span class="toc-text">逻辑运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三元运算符"><span class="toc-number">6.0.12.</span> <span class="toc-text">三元运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#特殊运算符"><span class="toc-number">6.0.13.</span> <span class="toc-text">特殊运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运算符优先级"><span class="toc-number">6.0.14.</span> <span class="toc-text">运算符优先级</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#条件判断、循环语句"><span class="toc-number">6.1.</span> <span class="toc-text">条件判断、循环语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#if-条件判断"><span class="toc-number">6.1.1.</span> <span class="toc-text">if 条件判断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#switch-分支语句"><span class="toc-number">6.1.2.</span> <span class="toc-text">switch 分支语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#while-循环"><span class="toc-number">6.1.3.</span> <span class="toc-text">while 循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for-循环"><span class="toc-number">6.1.4.</span> <span class="toc-text">for 循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#break-语句"><span class="toc-number">6.1.5.</span> <span class="toc-text">break 语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#continue-语句"><span class="toc-number">6.1.6.</span> <span class="toc-text">continue 语句</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-number">6.2.</span> <span class="toc-text">数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数组概念"><span class="toc-number">6.2.1.</span> <span class="toc-text">数组概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组索引"><span class="toc-number">6.2.2.</span> <span class="toc-text">数组索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#元素访问"><span class="toc-number">6.2.3.</span> <span class="toc-text">元素访问</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组长度"><span class="toc-number">6.2.4.</span> <span class="toc-text">数组长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组创建"><span class="toc-number">6.2.5.</span> <span class="toc-text">数组创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组操作"><span class="toc-number">6.2.6.</span> <span class="toc-text">数组操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数"><span class="toc-number">6.3.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#说明"><span class="toc-number">6.3.1.</span> <span class="toc-text">说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#调用"><span class="toc-number">6.3.2.</span> <span class="toc-text">调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#变量-1"><span class="toc-number">6.3.3.</span> <span class="toc-text">变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#拷贝传值"><span class="toc-number">6.3.4.</span> <span class="toc-text">拷贝传值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用传值"><span class="toc-number">6.3.5.</span> <span class="toc-text">引用传值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#匿名函数"><span class="toc-number">6.3.6.</span> <span class="toc-text">匿名函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二维数组"><span class="toc-number">6.3.7.</span> <span class="toc-text">二维数组</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象"><span class="toc-number">6.4.</span> <span class="toc-text">对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基本概念"><span class="toc-number">6.4.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#大致分类"><span class="toc-number">6.4.2.</span> <span class="toc-text">大致分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义对象"><span class="toc-number">6.4.3.</span> <span class="toc-text">自定义对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内置对象"><span class="toc-number">6.4.4.</span> <span class="toc-text">内置对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#String属性、方法"><span class="toc-number">6.4.5.</span> <span class="toc-text">String属性、方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Array属性、方法"><span class="toc-number">6.4.6.</span> <span class="toc-text">Array属性、方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Date属性、方法"><span class="toc-number">6.4.7.</span> <span class="toc-text">Date属性、方法</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">文章</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">标签</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">分类</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 4
+        <!-- search  -->
+        </div>
+            <div class="site-search popup-trigger">
+                <span class="iconfont-archer search-icon">&#xe627;</span>
+            </div>
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/17</span><a class="archive-post-title" href= "/2018/08/17/强化学习笔记《WEB前端快速巩固-JavaScript》/" >强化学习笔记《WEB前端快速巩固-JavaScript》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2018/07/30/强化学习笔记《WEB前端快速巩固-CSS》/" >强化学习笔记《WEB前端快速巩固-CSS》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/25</span><a class="archive-post-title" href= "/2018/07/25/强化学习笔记《WEB前端快速巩固-HTML》/" >强化学习笔记《WEB前端快速巩固-HTML》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/21</span><a class="archive-post-title" href= "/2018/07/21/利用Conky打造华丽的Linux桌面监控/" >利用Conky打造华丽的Linux桌面监控</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
+    
+        <span class="sidebar-tag-name" data-tags="前端"><span class="iconfont-archer">&#xe606;</span>前端</span>
+    
+        <span class="sidebar-tag-name" data-tags="CSS"><span class="iconfont-archer">&#xe606;</span>CSS</span>
+    
+        <span class="sidebar-tag-name" data-tags="Javascript"><span class="iconfont-archer">&#xe606;</span>Javascript</span>
+    
+        <span class="sidebar-tag-name" data-tags="程序"><span class="iconfont-archer">&#xe606;</span>程序</span>
+    
+        <span class="sidebar-tag-name" data-tags="桌面工具"><span class="iconfont-archer">&#xe606;</span>桌面工具</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="前端"><span class="iconfont-archer">&#xe60a;</span>前端</span>
+    
+        <span class="sidebar-category-name" data-categories="杂项"><span class="iconfont-archer">&#xe60a;</span>杂项</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "PoCo"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+    
+        <!-- 页面点击小红心 -->
+	<script type="text/javascript" src="./scripts/clicklove.js"></script>
+    </body>
+</html>
