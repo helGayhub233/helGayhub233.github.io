@@ -2,7 +2,7 @@ const ap = new APlayer({
     container: document.getElementById('aplayer'),
     fixed: false,
     autoplay: false,
-    volume: 0.15,
+    volume: 0.1,
     preload: 'auto',
 	order: 'random',
     listFolded: true,
@@ -22,7 +22,7 @@ const ap = new APlayer({
         url: 'http://offhzec02.bkt.clouddn.com/lo213iszm.mp3',
         cover: 'https://p1.music.126.net/GmWtbwYH64Ai_65vYn6E3Q==/3438172871857105.jpg?param=130y130',
       },
-*/
+
       {
         name: 'Fast Car',
         artist: 'Jonas Blue',
@@ -35,11 +35,12 @@ const ap = new APlayer({
         url: 'http://offhzec02.bkt.clouddn.com/wPcOCcORY9GFRFy1P1Rc.mp3',
         cover: 'https://p1.music.126.net/aBE9Hc1G7S_Sp3ZcFG-tLA==/18421217812016775.jpg?param=130y130',
       },
-            {
-        name: 'GHEN Remix',
-        artist: 'cloudfield',
-        url: 'http://music.163.com/song/media/outer/url?id=492144657.mp3',
-        cover: 'https://p1.music.126.net/LRREM3GsXC99vpKT3Zoz5A==/19218363742154656.jpg?param=130y130',
+      {
+        name: 'Sing For You',
+        artist: 'Dirty Palm',
+        url: 'http://music.163.com/song/media/outer/url?id=491955358.mp3',
+        cover: 'https://p1.music.126.net/CjmWJrJKlfFXXAI3F4k--g==/18701593278831158.jpg?param=200y200',
       },
+*/
     ]
 });
